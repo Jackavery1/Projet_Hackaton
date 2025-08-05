@@ -13,8 +13,8 @@ const schemaUtilisateur = new mongoose.Schema({
     nomUtilisateur: { type: String, required: true, unique: true },
     motDePasse: {type: String, required: true}
 });
-const Idee = mongoose.model('Idee', schemaIdee);
+const Idee = mongoose.model('Idee', IdeeSchema);
 const Utilisateur = mongoose.model('Utilisateur', schemaUtilisateur);
 
 // Exportation du modèle
-module.exports = mongoose.model("idee", IdeeSchema);
+module.exports = { Idee, Utilisateur };

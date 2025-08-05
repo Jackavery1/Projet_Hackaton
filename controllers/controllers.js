@@ -1,5 +1,5 @@
 
-const Idee = require('../models/models'); 
+const { Idee } = require('../models/models'); 
 
 exports.creerIdee = async (req, res) => {
     try {

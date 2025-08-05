@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router(); 
 const controleursIdees = require('../controllers/controllers.js'); 
 
+router.get("/", controleursIdees.afficherAccueil);
 router.post('/api/idees', controleursIdees.creerIdee);
 router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
 
-router.get("/", accueilController.afficherAccueil);
 
 module.exports = router; 
 

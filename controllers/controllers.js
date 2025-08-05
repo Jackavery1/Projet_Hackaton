@@ -1,0 +1,1 @@
+exports.afficherAccueil = (req, res) => res.render("accueil")

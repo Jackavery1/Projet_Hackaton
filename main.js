@@ -1,10 +1,8 @@
-
-require('dotenv').config();
-
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const connecterBaseDeDonnees = require('./database/database.js');
-const router = require('./routes/routes.js');
+const connecterBaseDeDonnees = require("./database/database.js");
+const router = require("./routes/routes.js");
 const path = require("path");
 const PORT = process.env.PORT || 3000;
 
@@ -17,8 +15,10 @@ app.set("views", path.join(__dirname, "views"));
 //Utilisation router
 app.use("/", router);
 
+//Appel Base
 connecterBaseDeDonnees();
 
+//Connexion localhost
 app.listen(PORT, () => {
-    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });

@@ -1,38 +1,39 @@
+const Idee = require("../models/models");
 
-const Idee = require('../models/models'); 
-
+//Controller pour ajouter des idées
 exports.creerIdee = async (req, res) => {
-    try {
-        const nouvelleIdee = new Idee({
-            titre: req.body.titre,
-            description: req.body.description
-        });
-        await nouvelleIdee.save(); 
-        res.status(201).json(nouvelleIdee); 
-    } catch (error) {
-        console.error("Erreur lors de la création de l'idée :", error);
-        res.status(500).json({ message: 'Erreur serveur.' });
-    }
+  try {
+    const nouvelleIdee = new Idee({
+      titre: req.body.titre,
+      description: req.body.description,
+    });
+    await nouvelleIdee.save();
+    res.status(201).json(nouvelleIdee);
+  } catch (error) {
+    console.error("Erreur lors de la création de l'idée :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
 };
+
+//Controller pour ajouter des commentaires
 exports.ajouterCommentaire = async (req, res) => {
-    try {
-        const idee = await Idee.findById(req.params.id);
-        if (!idee) {
-            return res.status(404).json({ message: 'Idée non trouvée.' });
-        }
-        idee.commentaires.push({ texte: req.body.texte });
-        await idee.save();
-        res.status(200).json(idee);
-    } catch (error) { 
-        console.error("Erreur lors de l'ajout du commentaire :", error);
-        res.status(500).json({ message: 'Erreur serveur.' });
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
     }
+    idee.commentaires.push({ texte: req.body.texte });
+    await idee.save();
+    res.status(200).json(idee);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du commentaire :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
 };
 
-exports.afficherAccueil = (req, res) => res.render("accueil")
+//Controller pour afficher la page d'accueil
+exports.afficherAccueil = (req, res) => res.render("accueil");
 // --------------------------------------------------------------------------------------------------------------------------
-
-
 
 // const bcrypt = require("bcrypt"); // Importe la librairie pour hacher les mots de passe
 // const jwt = require("jsonwebtoken"); // Importe la librairie pour créer et vérifier les JSON Web Tokens (JWT)
@@ -40,11 +41,10 @@ exports.afficherAccueil = (req, res) => res.render("accueil")
 
 // const JWT_SECRET = process.env.JWT_SECRET; // Récupère la clé secrète pour les JWT depuis votre fichier .env
 
-
 // // --- Fonctions d'authentification ---
 
 // exports.register = async (req, res) => {
-//     // Récupère le nom d'utilisateur et le mot de passe 
+//     // Récupère le nom d'utilisateur et le mot de passe
 //     const { username, password } = req.body;
 
 //     // Vérifie si les champs obligatoires sont présents

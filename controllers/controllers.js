@@ -29,7 +29,7 @@ exports.ajouterCommentaire = async (req, res) => {
     }
 };
 
-exports.afficherAccueil = (req, res) => res.render("accueil")
+exports.afficherAccueil = (req, res) => res.render("index")
 // --------------------------------------------------------------------------------------------------------------------------
 
 

@@ -16,5 +16,5 @@ const schemaUtilisateur = new mongoose.Schema({
 const Idee = mongoose.model('Idee', IdeeSchema);
 const Utilisateur = mongoose.model('Utilisateur', schemaUtilisateur);
 
-// Exportation du modèle
+
 module.exports = { Idee, Utilisateur };

@@ -1,14 +1,20 @@
+
 const mongoose = require("mongoose");
 
 // Modèle idée
 const IdeeSchema = new mongoose.Schema({
   id: Number,
-  titre: reqire true, String,
-  definition: String,
-  //categorie: String,
-  like: {default null, true/false,}
-  commentaire: default 0, string 
+    titre: { type: String, required: true },
+    description: { type: String, required: true }, 
+    commentaires: [{ texte: String}]
 });
+
+const schemaUtilisateur = new mongoose.Schema({
+    nomUtilisateur: { type: String, required: true, unique: true },
+    motDePasse: {type: String, required: true}
+});
+const Idee = mongoose.model('Idee', schemaIdee);
+const Utilisateur = mongoose.model('Utilisateur', schemaUtilisateur);
 
 // Exportation du modèle
 module.exports = mongoose.model("idee", IdeeSchema);

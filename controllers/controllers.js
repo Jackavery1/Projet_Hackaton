@@ -1,3 +1,4 @@
+
 const Idee = require('../models/models'); 
 
 exports.creerIdee = async (req, res) => {
@@ -27,6 +28,8 @@ exports.ajouterCommentaire = async (req, res) => {
         res.status(500).json({ message: 'Erreur serveur.' });
     }
 };
+
+exports.afficherAccueil = (req, res) => res.render("accueil")
 // --------------------------------------------------------------------------------------------------------------------------
 
 

@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router(); 
 const controleursIdees = require('../controllers/controllers.js'); 
@@ -5,6 +6,7 @@ const controleursIdees = require('../controllers/controllers.js');
 router.post('/api/idees', controleursIdees.creerIdee);
 router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
 
+router.get("/", accueilController.afficherAccueil);
 
 module.exports = router; 
 
@@ -25,3 +27,4 @@ module.exports = router;
 // router.get('/api/idees', controleurs.listerIdees);
 
 // module.exports = router;
+

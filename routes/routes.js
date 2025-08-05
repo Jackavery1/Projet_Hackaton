@@ -3,10 +3,15 @@ const express = require('express');
 const router = express.Router(); 
 const controleursIdees = require('../controllers/controllers.js'); 
 
-router.get("/", controleursIdees.afficherAccueil);
+router.get('/', controleursIdees.afficherAccueil);
+
 router.post('/api/idees', controleursIdees.creerIdee);
 router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
+router.post('/api/idees/:id/like', controleursIdees.ajouterLike);
 
+router.delete('/api/idees/:id', controleursIdees.supprimerIdee);
+router.delete('/api/idees/:id/commentaire/:commentaireIndex', controleursIdees.supprimerCommentaire);
+router.delete('/api/idees/:id/like', controleursIdees.supprimerLike);
 
 module.exports = router; 
 

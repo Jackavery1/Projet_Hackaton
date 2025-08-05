@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 
 // Modèle idée
 const IdeeSchema = new mongoose.Schema({
-  id: Number,
+    id: Number,
     titre: { type: String, required: true },
     description: { type: String, required: true }, 
-    commentaires: [{ texte: String}]
+    commentaires: [{ texte: String}],
+    likes: { type: Number, default: 0}
 });
 
 const schemaUtilisateur = new mongoose.Schema({

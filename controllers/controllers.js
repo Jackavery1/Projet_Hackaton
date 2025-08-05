@@ -29,6 +29,73 @@ exports.ajouterCommentaire = async (req, res) => {
     }
 };
 
+exports.supprimerIdee = async (req, res) => {
+    try {
+        const idee = await Idee.findByIdAndDelete(req.params.id);
+        if (!idee) {
+            return res.status(404).json({ message: "Idée non trouvée."});
+        }
+        res.status(200).json({ message: "Idée supprimée avec succès."});
+    } catch(error) {
+        console.error("Erreur lors de la suppression de l'idée :", error);
+        res.status(500).json({ message: "Erreur serveur."})
+    }
+};
+
+exports.supprimerCommentaire = async (req, res) => {
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
+    }
+    const commentaireIndex = req.params.commentaireIndex;
+    if (commentaireIndex < 0 || commentaireIndex >= idee.commentaires.length) {
+      return res.status(404).json({ message: "Commentaire non trouvé." });
+    }
+    idee.commentaires.splice(commentaireIndex, 1);
+    await idee.save();
+    res.status(200).json(idee);
+  } catch (error) {
+    console.error("Erreur lors de la suppression du commentaire :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+};
+
+exports.ajouterLike = async (req, res) => {
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
+    }
+    idee.likes += 1;
+    await idee.save();
+    res.status(200).json({ message: "Like ajouté.", likes: idee.likes });
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du like :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+};
+
+exports.supprimerLike = async (req, res) => {
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
+    }
+    if (idee.likes > 0) {
+      idee.likes -= 1;
+      await idee.save();
+      return res.status(200).json({ message: "Like supprimé.", likes: idee.likes });
+    } else {
+      return res.status(400).json({ message: "Pas de like à supprimer." });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la suppression du like :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+};
+
+
 exports.afficherAccueil = (req, res) => res.render("index")
 // --------------------------------------------------------------------------------------------------------------------------
 

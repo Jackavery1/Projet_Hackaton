@@ -3,11 +3,18 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const connecterBaseDeDonnees = require('./database/database.js');
-const routes = require('./routes/routes.js');
+const router = require('./routes/routes.js');
+const path = require("path");
 const PORT = 3000;
 
+// Middleware
 app.use(express.json());
-app.use('/', routes);
+app.use(express.urlencoded({ extended: false }));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+//Utilisation router
+app.use("/", router);
 
 connecterBaseDeDonnees();
 

@@ -15,11 +15,15 @@ Client : Ejs Tailwind
 Tailwind : npx @tailwindcss/cli -i ./public/input.css -o ./public/styles.css --watch
 ```
 
-global : views/partials/header.ejs views/partials/formBox.ejs
-
-/ : views/pages/ideaList.ejs views/partials/componentIdeaList.ejs
+/ : views/pages/login.ejs
 |
-|__/idea/:id : views/pages/ideaPage.ejs
+|__/signin : views/pages/signin.ejs
+|
+|   global : views/partials/header.ejs views/partials/formBox.ejs
+|
+|__/listeidee : views/pages/ideaList.ejs views/partials/componentIdeaList.ejs
+  |
+  |__/idee/:id : views/pages/ideaPage.ejs views/partials/componentComment.ejs
 
 ```
 

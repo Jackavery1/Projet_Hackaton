@@ -121,5 +121,8 @@ Cliquez sur send, le resultat attendu:
   ],
   "__v": 1
 }
+Pour supprimer un like il faut la methode POST
+Selectionnez POST dans le menu déroulant à gauche de l'URL
 
 Et puis voila tu sais tout maintenant tu te débrouille !!!!!!!!! Allez bisous.
+

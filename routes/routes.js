@@ -15,7 +15,7 @@ router.delete('/api/idees/:id/commentaires/:commentaireId', controleurs.supprime
 // --- Routes pour les likes ---
 router.post('/api/idees/:id/like', controleurs.likerIdee); // Liker une idée
 // Correction : utilise POST pour 'unlike' pour correspondre au comportement du contrôleur (décrémenter)
-router.post('/api/idees/:id/unlike', controleurs.supprimerLike); // Décrémenter les likes d'une idée
+router.post('/api/idees/:id/deletelike', controleurs.supprimerLike); // Décrémenter les likes d'une idée
 router.post('/api/idees/:ideeId/commentaires/:commentaireId/like', controleurs.likerCommentaire); // Liker un commentaire
 
 // --- Routes pour les vues (si vous utilisez EJS) ---

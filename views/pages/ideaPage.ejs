@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= idea.name %></title>
+    <title>
+        <%= idea.name %>
+    </title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 
@@ -14,12 +16,19 @@
 
         <main class="relative ml-[11vw] w-[89vw] flex flex-col justify-start">
 
-            <div class="flex justify-center">
-                <h2 class="text-center text-4xl mb-5 font-black">
+            <div class="flex justify-center items-center mb-5">
+                <form action=<%="/idea/" + idea.id + "/delete" %> method="post">
+                    <button type="submit"
+                        class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.8rem] text-xl mr-8">
+                        X - Delete
+                    </button>
+                </form>
+                <h2 class="text-center text-4xl font-black">
                     <%= idea.name %>
                 </h2>
                 <form action=<%="/idea/" + idea.id + "/like" %> method="post">
-                    <button type="submit" class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold text-lg ml-8">
+                    <button type="submit"
+                        class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl ml-8">
                         <%= idea.like ? "♥" : "♡" %>
                     </button>
                 </form>
@@ -29,7 +38,8 @@
                 <p class="text-lg text-black font-bold">
                     <%= idea.content %>
                 </p>
-                <p class="text-sm text-slate-900 font-medium">Likes : <%= idea.likes %> - Commentaires : <%= idea.comments.length %>
+                <p class="text-sm text-slate-900 font-medium">Likes : <%= idea.likes %> - Commentaires : <%=
+                            idea.comments.length %>
                 </p>
             </div>
 

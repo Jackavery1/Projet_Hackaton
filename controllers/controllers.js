@@ -1,5 +1,6 @@
-
 const { Idee } = require('../models/models'); 
+
+// #region CRUD (API)
 
 exports.creerIdee = async (req, res) => {
     try {
@@ -14,6 +15,7 @@ exports.creerIdee = async (req, res) => {
         res.status(500).json({ message: 'Erreur serveur.' });
     }
 };
+
 exports.ajouterCommentaire = async (req, res) => {
     try {
         const idee = await Idee.findById(req.params.id);
@@ -95,8 +97,27 @@ exports.supprimerLike = async (req, res) => {
   }
 };
 
+// #endregion
 
-exports.afficherAccueil = (req, res) => res.render("index")
+// #region Views (Pages HTML)
+
+exports.afficherAccueil = (req, res) => {
+  let idea = { id: 1, name: "Accueil", content: "Bienvenue sur la page d'accueil" };
+  res.render("pages/ideaPage", { idea });
+};
+
+exports.afficherIdeaList = (req, res) => {
+    let ideas = [{ "id": 1, "name": "Patate", "content": "Patate" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre" }];
+    res.render("pages/ideaList", { ideas: ideas });
+};
+
+exports.afficherIdeaPage = (req, res) => {
+    let idea = { "id": 1, "name": "Patate", "content": "Patate" };
+    res.render("pages/ideaPage", { idea: idea });
+};
+
+// #endregion
+
 // --------------------------------------------------------------------------------------------------------------------------
 
 

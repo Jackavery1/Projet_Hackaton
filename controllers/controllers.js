@@ -88,7 +88,7 @@ exports.supprimerCommentaire = async (req, res) => {
         }
         // Récupère l'ID du commentaire à supprimer depuis les paramètres de l'URL.
         const commentaireId = req.params.commentaireId;
-        
+
         // Stocke la longueur actuelle du tableau de commentaires pour vérifier si un commentaire a été supprimé.
         const commentairesAvantSuppression = idee.commentaires.length;
         // Filtre le tableau de commentaires pour exclure celui dont l'ID correspond.
@@ -98,6 +98,16 @@ exports.supprimerCommentaire = async (req, res) => {
         if (idee.commentaires.length === commentairesAvantSuppression) {
             return res.status(404).json({ message: "Commentaire non trouvé." });
         }
+
+        // Sauvegarde l'idée avec le commentaire supprimé.
+        await idee.save();
+        // Renvoie l'idée mise à jour avec un statut 200.
+        res.status(200).json(idee);
+    } catch (error) {
+        // En cas d'erreur, log l'erreur et renvoie un statut 500.
+        console.error("Erreur lors de la suppression du commentaire :", error);
+        res.status(500).json({ message: "Erreur serveur." });
+    }
 };
 
 exports.supprimerIdee = async (req, res) => {
@@ -129,30 +139,20 @@ exports.ajouterLike = async (req, res) => {
 };
 
 exports.supprimerLike = async (req, res) => {
-  try {
-    const idee = await Idee.findById(req.params.id);
-    if (!idee) {
-      return res.status(404).json({ message: "Idée non trouvée." });
-    }
-    if (idee.likes > 0) {
-      idee.likes -= 1;
-      await idee.save();
-      return res.status(200).json({ message: "Like supprimé.", likes: idee.likes });
-    } else {
-      return res.status(400).json({ message: "Pas de like à supprimer." });
-    }
-  } catch (error) {
-    console.error("Erreur lors de la suppression du like :", error);
-    res.status(500).json({ message: "Erreur serveur." });
-  }
-
-        // Sauvegarde l'idée avec le commentaire supprimé.
-        await idee.save();
-        // Renvoie l'idée mise à jour avec un statut 200.
-        res.status(200).json(idee);
+    try {
+        const idee = await Idee.findById(req.params.id);
+        if (!idee) {
+            return res.status(404).json({ message: "Idée non trouvée." });
+        }
+        if (idee.likes > 0) {
+            idee.likes -= 1;
+            await idee.save();
+            return res.status(200).json({ message: "Like supprimé.", likes: idee.likes });
+        } else {
+            return res.status(400).json({ message: "Pas de like à supprimer." });
+        }
     } catch (error) {
-        // En cas d'erreur, log l'erreur et renvoie un statut 500.
-        console.error("Erreur lors de la suppression du commentaire :", error);
+        console.error("Erreur lors de la suppression du like :", error);
         res.status(500).json({ message: "Erreur serveur." });
     }
 };
@@ -256,7 +256,7 @@ exports.afficherIdeaList = (req, res) => {
 
 exports.afficherIdeaPage = (req, res) => {
     let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1}, {"id": 2}] };
-    res.render("pages/ideaPage", {idea: idea})
+    res.render("pages/ideaPage", { idea: idea })
 }
 
 

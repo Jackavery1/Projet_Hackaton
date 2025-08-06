@@ -29,7 +29,7 @@
                     <%= idea.name %>
                 </h2>
 
-                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "unlike" : "like") %> method="post">
+                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
                     <button type="submit"
                         class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl ml-8">
                         <%= idea.like ? "♥" : "♡" %>

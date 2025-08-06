@@ -248,6 +248,13 @@ exports.likerCommentaire = async (req, res) => {
 
 // #region Views (Pages HTML)
 
+exports.afficherLogin = (req, res) => {
+    res.render("pages/login");
+};
+
+exports.afficherSignin = (req, res) => {
+    res.render("pages/signin");
+};
 
 exports.afficherIdeaList = (req, res) => {
     let ideas = [{ "id": 1, "name": "Patate", "content": "Patate" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre" }];
@@ -255,7 +262,7 @@ exports.afficherIdeaList = (req, res) => {
 };
 
 exports.afficherIdeaPage = (req, res) => {
-    let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1}, {"id": 2}] };
+    let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1, "name": "Patrick", "content": "C'est bien."}, {"id": 2, "name": "Patrick", "content": "C'est nul."}] };
     res.render("pages/ideaPage", { idea: idea })
 }
 

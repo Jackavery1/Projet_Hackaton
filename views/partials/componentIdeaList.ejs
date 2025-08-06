@@ -1,5 +1,6 @@
 <li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3">
-    <a href=<%= "/idea/" + idea.name %> class="text-decoration-none flex justify-between">
+    <a href=<%="/idee/" + idea.name %> class="text-decoration-none flex justify-between items-center">
+
         <div class="flex flex-col">
             <h5 class="text-black text-lg font-bold">
                 <%= idea.name %>
@@ -8,10 +9,13 @@
                 <%= idea.content %>
             </p>
         </div>
-        <form action=<%="/idea/" + idea.id + "/like" %> method="post">
-            <button type="submit" class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold text-lg">
+
+        <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "unlike" : "like") %> method="post">
+            <button type="submit"
+                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
                 <%= idea.like ? "♥" : "♡" %>
             </button>
         </form>
+
     </a>
 </li>

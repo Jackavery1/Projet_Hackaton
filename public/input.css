@@ -29,7 +29,6 @@ h1 {
 }
 
 button {
-  padding: 0.6em 1.2em;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.25s;
@@ -42,17 +41,4 @@ button:focus-visible {
 .selected {
   transition: var(--transition-Global);
   transform: scale(1.01) translateX(1rem);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

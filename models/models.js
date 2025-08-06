@@ -6,8 +6,10 @@ const IdeeSchema = new mongoose.Schema({
     id: Number,
     titre: { type: String, required: true },
     description: { type: String, required: true }, 
-    commentaires: [{ texte: String}],
-    likes: { type: Number, default: 0}
+    commentaires: [{ texte: String,
+        likes: { type: Number, default: 0 }
+}],
+    likes: { type: Number, default: 0 }
 });
 
 const schemaUtilisateur = new mongoose.Schema({
@@ -17,5 +19,8 @@ const schemaUtilisateur = new mongoose.Schema({
 const Idee = mongoose.model('Idee', IdeeSchema);
 const Utilisateur = mongoose.model('Utilisateur', schemaUtilisateur);
 
-
-module.exports = { Idee, Utilisateur };
+// Exportation du modèle
+module.exports = {
+    Idee,
+    Utilisateur
+};

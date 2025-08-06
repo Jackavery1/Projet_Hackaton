@@ -1,23 +1,29 @@
 const express = require('express');
-const router = express.Router(); 
-const controleursIdees = require('../controllers/controllers.js'); 
+const router = express.Router();
+const controleurs = require('../controllers/controllers.js'); // Importe TOUTES les fonctions du contrôleur sous un seul nom
 
-// Routes HTML
-router.get('/', controleursIdees.afficherAccueil);
-router.get('/ideaList', controleursIdees.afficherIdeaList);
-router.get('/idea/:id', controleursIdees.afficherIdeaPage);
+// --- Routes pour les idées ---
+router.post('/api/idees', controleurs.creerIdee);
+router.get('/api/idees', controleurs.listerIdees); // Ajout de la route pour lister les idées
+router.delete('/api/idees/:id', controleurs.supprimerIdee); // Supprimer une idée
 
-// Routes API
-router.post('/api/idees', controleursIdees.creerIdee);
-router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
-router.post('/api/idees/:id/like', controleursIdees.ajouterLike);
+// --- Routes pour les commentaires ---
+router.post('/api/idees/:id/commentaire', controleurs.ajouterCommentaire);
+// Correction : utilise :commentaireId pour correspondre au contrôleur
+router.delete('/api/idees/:id/commentaires/:commentaireId', controleurs.supprimerCommentaire); // Supprimer un commentaire
 
-router.delete('/api/idees/:id', controleursIdees.supprimerIdee);
-router.delete('/api/idees/:id/commentaire/:commentaireIndex', controleursIdees.supprimerCommentaire);
-router.delete('/api/idees/:id/like', controleursIdees.supprimerLike);
+// --- Routes pour les likes ---
+router.post('/api/idees/:id/like', controleurs.likerIdee); // Liker une idée
+// Correction : utilise POST pour 'unlike' pour correspondre au comportement du contrôleur (décrémenter)
+router.post('/api/idees/:id/unlike', controleurs.supprimerLike); // Décrémenter les likes d'une idée
+router.post('/api/idees/:ideeId/commentaires/:commentaireId/like', controleurs.likerCommentaire); // Liker un commentaire
+
+// --- Routes pour les vues (si vous utilisez EJS) ---
+// Utilise 'controleurs' pour toutes les fonctions de vue pour la cohérence
+router.get("/", controleurs.afficherIdeaList);
+router.get("/idea/:id", controleurs.afficherIdeaPage);
 
 module.exports = router;
-
 
 // ------------------------------------------------------------------------------
 

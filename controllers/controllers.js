@@ -41,7 +41,7 @@ exports.afficherIdeaList = (req, res) => {
     res.render("pages/ideaList", {ideas: ideas})
 }
 exports.afficherIdeaPage = (req, res) => {
-    let idea = { "id": 1, "name": "Patate", "content": "Patate" };
+    let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1}, {"id": 2}] };
     res.render("pages/ideaPage", {idea: idea})
 }
 

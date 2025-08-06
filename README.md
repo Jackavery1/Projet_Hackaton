@@ -100,7 +100,7 @@ Cliquez sur send, le resultat attendu:
 Pour like un commentaire
 Selectionnez POST dans le menu déroulant à gauche de l'URL
 Puis dans l'URL mettre (http://localhost:3000/api/idees/6892fb756f7ba7a6907919e6/commentaires/6893025b6f7ba7a6907919e9/like)
-                       ( adresse normal                / id de l'idée           /commentaire / id du commentaire     / like)
+                       ( adresse normal                / id de l'idée           /commentaires/ id du commentaire     / like)
 Ne rien mettre dans le body
 Cliquez sur send, le resultat attendu:
 {

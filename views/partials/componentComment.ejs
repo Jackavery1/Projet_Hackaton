@@ -1,0 +1,24 @@
+<li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 flex justify-between items-center">
+    <div class="flex gap-3">
+        <form action=<%="/comment/" + comment.id + "/delete" %> method="post" class=" pb-[0.4rem] pr-[1.2rem]">
+            <button type="submit"
+                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-xl">
+                X
+            </button>
+        </form>
+        <div class="flex flex-col self-center">
+            <h5 class="text-black text-lg font-bold">
+                <%= comment.name %>
+            </h5>
+            <p class="text-black text-sm font-medium">
+                <%= comment.content %>
+            </p>
+        </div>
+    </div>
+    <form action=<%="/comment/" + comment.id + "/like" %> method="post">
+        <button type="submit"
+            class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
+            <%= comment.like ? "♥" : "♡" %>
+        </button>
+    </form>
+</li>

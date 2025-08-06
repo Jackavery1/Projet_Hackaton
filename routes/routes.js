@@ -20,8 +20,10 @@ router.post('/api/idees/:ideeId/commentaires/:commentaireId/like', controleurs.l
 
 // --- Routes pour les vues (si vous utilisez EJS) ---
 // Utilise 'controleurs' pour toutes les fonctions de vue pour la cohérence
-router.get("/", controleurs.afficherIdeaList);
-router.get("/idea/:id", controleurs.afficherIdeaPage);
+router.get("/", controleurs.afficherLogin);
+router.get("/signin", controleurs.afficherSignin);
+router.get("/listeidee", controleurs.afficherIdeaList);
+router.get("/idee/:id", controleurs.afficherIdeaPage);
 
 module.exports = router;
 

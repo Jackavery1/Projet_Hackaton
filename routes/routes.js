@@ -7,7 +7,8 @@ const accueilController = require('../controllers/controllers.js');
 router.post('/api/idees', controleursIdees.creerIdee);
 router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
 
-router.get("/", accueilController.afficherAccueil);
+router.get("/", accueilController.afficherIdeaList);
+router.get("/idea/:id", accueilController.afficherIdeaPage);
 
 module.exports = router; 
 

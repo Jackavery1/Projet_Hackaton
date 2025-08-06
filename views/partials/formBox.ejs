@@ -1,0 +1,9 @@
+<div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto">
+    <h4 class="text-center text-black text-3xl font-bold mb-4"> 
+        <%= form_type == "idea" ? "Proposer une nouvelle idée" : "Écrire un commentaire" %></h4>
+    <form action=<%= "/api/set_" + form_type %> method="post" class="flex flex-col text-black">
+        <label for=<%= form_type %> class="text-xl font-medium mb-2">
+            <%= form_type == "idea" ? "Idée" : "Commentaire" %></label>
+        <textarea name=<%= form_type %> id=<%= form_type %> class="bg-slate-300 rounded-2xl p-3 text-lg"></textarea>
+    </form>
+</div>

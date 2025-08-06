@@ -1,6 +1,6 @@
 const { Idee, Utilisateur } = require("../models/models"); // Importe les modèles Mongoose 'Idee' et 'Utilisateur' pour interagir avec la base de données.
 
-// --- Fonctions CRUD (Create, Read, Update, Delete) pour les idées ---
+// #region --- Fonctions CRUD (Create, Read, Update, Delete) pour les idées ---
 
 // Fonction pour créer une nouvelle idée
 exports.creerIdee = async (req, res) => {
@@ -98,6 +98,53 @@ exports.supprimerCommentaire = async (req, res) => {
         if (idee.commentaires.length === commentairesAvantSuppression) {
             return res.status(404).json({ message: "Commentaire non trouvé." });
         }
+};
+
+exports.supprimerIdee = async (req, res) => {
+    try {
+        const idee = await Idee.findByIdAndDelete(req.params.id);
+        if (!idee) {
+            return res.status(404).json({ message: "Idée non trouvée."});
+        }
+        res.status(200).json({ message: "Idée supprimée avec succès."});
+    } catch(error) {
+        console.error("Erreur lors de la suppression de l'idée :", error);
+        res.status(500).json({ message: "Erreur serveur."})
+    }
+};
+
+exports.ajouterLike = async (req, res) => {
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
+    }
+    idee.likes += 1;
+    await idee.save();
+    res.status(200).json({ message: "Like ajouté.", likes: idee.likes });
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du like :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+};
+
+exports.supprimerLike = async (req, res) => {
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) {
+      return res.status(404).json({ message: "Idée non trouvée." });
+    }
+    if (idee.likes > 0) {
+      idee.likes -= 1;
+      await idee.save();
+      return res.status(200).json({ message: "Like supprimé.", likes: idee.likes });
+    } else {
+      return res.status(400).json({ message: "Pas de like à supprimer." });
+    }
+  } catch (error) {
+    console.error("Erreur lors de la suppression du like :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
 
         // Sauvegarde l'idée avec le commentaire supprimé.
         await idee.save();
@@ -197,12 +244,15 @@ exports.likerCommentaire = async (req, res) => {
 
 
 
+// #endregion
+
+// #region Views (Pages HTML)
+
 
 exports.afficherIdeaList = (req, res) => {
     let ideas = [{ "id": 1, "name": "Patate", "content": "Patate" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre" }];
-    res.render("pages/ideaList", {ideas: ideas})
-}
-
+    res.render("pages/ideaList", { ideas: ideas });
+};
 
 exports.afficherIdeaPage = (req, res) => {
     let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1}, {"id": 2}] };

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const controleurs = require('../controllers/controllers.js'); // Importe TOUTES les fonctions du contrôleur sous un seul nom

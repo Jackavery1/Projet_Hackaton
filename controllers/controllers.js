@@ -1,6 +1,8 @@
 const { Idee, Utilisateur } = require("../models/models");
 // const Idee = require('../models/models'); 
 
+// #region CRUD
+
 exports.creerIdee = async (req, res) => {
     try {
         const nouvelleIdee = new Idee({
@@ -14,6 +16,7 @@ exports.creerIdee = async (req, res) => {
         res.status(500).json({ message: 'Encore la faute du serveur.' });
     }
 };
+
 exports.ajouterCommentaire = async (req, res) => {
     try {
         const idee = await Idee.findById(req.params.id);
@@ -75,7 +78,21 @@ exports.likerCommentaire = async (req, res) => {
 };
 
 
-exports.afficherAccueil = (req, res) => res.render("accueil")
+// #endregion
+
+// #region Views
+
+exports.afficherIdeaList = (req, res) => {
+    let ideas = [{ "id": 1, "name": "Patate", "content": "Patate" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre" }];
+    res.render("pages/ideaList", {ideas: ideas})
+}
+exports.afficherIdeaPage = (req, res) => {
+    let idea = { "id": 1, "name": "Patate", "content": "Patate" };
+    res.render("pages/ideaPage", {idea: idea})
+}
+
+// #endregion
+
 // --------------------------------------------------------------------------------------------------------------------------
 
 

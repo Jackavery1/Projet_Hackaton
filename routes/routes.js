@@ -8,7 +8,8 @@ router.post('/api/idees', controleursIdees.creerIdee);
 router.post('/api/idees/:id/commentaire', controleursIdees.ajouterCommentaire);
 router.post('/api/idees/:id/like', controleursIdees.likerIdee);
 router.post('/api/idees/:ideeId/commentaires/:commentaireId/like', controleursIdees.likerCommentaire);
-router.get("/", accueilController.afficherAccueil);
+router.get("/", accueilController.afficherIdeaList);
+router.get("/idea/:id", accueilController.afficherIdeaPage);
 
 
 module.exports = router; 

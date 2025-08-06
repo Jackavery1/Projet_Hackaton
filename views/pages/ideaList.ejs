@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liste d'idées</title>
+    <link rel="stylesheet" type="text/css" href="views/styles.css">
+</head>
+
+<body class="size-full">
+
+    <%- include('../partials/header'); %>
+
+        <main class="relative ml-[11vw] w-[89vw] flex flex-col justify-start">
+            <div class="w-5xl mx-auto flex flex-col justify-start items-center">
+
+                <%- include('../partials/formBox', {form_type: "idea"}); %>
+
+                    <h2 class="text-center text-4xl font-black mt-8 mb-5">Idées</h2>
+
+                    <ul class="w-full mb-5">
+                        <%- ideas.map((idea)=> ( include('../partials/componentIdeaList', {idea: idea}) )) %>
+                    </ul>
+
+            </div>
+        </main>
+
+</body>
+
+</html>

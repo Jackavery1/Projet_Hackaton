@@ -1,5 +1,5 @@
-
-const Idee = require('../models/models'); 
+const { Idee, Utilisateur } = require("../models/models");
+// const Idee = require('../models/models'); 
 
 exports.creerIdee = async (req, res) => {
     try {
@@ -11,7 +11,7 @@ exports.creerIdee = async (req, res) => {
         res.status(201).json(nouvelleIdee); 
     } catch (error) {
         console.error("Erreur lors de la création de l'idée :", error);
-        res.status(500).json({ message: 'Erreur serveur.' });
+        res.status(500).json({ message: 'Encore la faute du serveur.' });
     }
 };
 exports.ajouterCommentaire = async (req, res) => {
@@ -25,9 +25,55 @@ exports.ajouterCommentaire = async (req, res) => {
         res.status(200).json(idee);
     } catch (error) { 
         console.error("Erreur lors de l'ajout du commentaire :", error);
-        res.status(500).json({ message: 'Erreur serveur.' });
+        res.status(500).json({ message: 'Serveur HS.' });
     }
 };
+exports.likerIdee = async (req, res) => {
+    try {
+        const ideeId = req.params.id; 
+
+        // Trouve l'idée par son ID et incrémente le champ 'likes' de 1
+        // { new: true } assure que la fonction retourne le document mis à jour
+        const idee = await Idee.findByIdAndUpdate(
+            ideeId,
+            { $inc: { likes: 1 } }, // $inc est un opérateur MongoDB pour incrémenter un champ
+            { new: true }
+        );
+        if (!idee) {
+            return res.status(404).json({ message: 'J ai pas trouvé l idée désolé.' });
+        }
+        res.status(200).json(idee); // Renvoie l'idée mise à jour avec le nouveau nombre de likes
+    } catch (error) {
+        console.error("ça n a pas liker l idée capitaine:", error);
+        res.status(500).json({ message: 'ça chie dans la colle coté serveur.' });
+    }
+};
+exports.likerCommentaire = async (req, res) => {
+    try {
+        const ideeId = req.params.ideeId; // L'ID de l'idée parente
+        const commentaireId = req.params.commentaireId; // L'ID du commentaire à liker
+
+        // Trouver l'idée parente
+        const idee = await Idee.findById(ideeId);
+        if (!idee) {
+            return res.status(404).json({ message: 'Idée non trouvée.' });
+        }
+        const commentaire = idee.commentaires.id(commentaireId); 
+        if (!commentaire) {
+            return res.status(404).json({ message: 'Commentaire non trouvé.' });
+        }
+        commentaire.likes += 1;
+
+        // Sauvegarder l'idée mise à jour (ce qui sauvegarde aussi le commentaire modifié)
+        await idee.save();
+
+        res.status(200).json(idee); // Renvoie l'idée complète avec le commentaire mis à jour
+    } catch (error) {
+        console.error("Ya un probléme chef avec le like du commentaire :", error);
+        res.status(500).json({ message: 'Ya plus de serveur.' });
+    }
+};
+
 
 exports.afficherAccueil = (req, res) => res.render("accueil")
 // --------------------------------------------------------------------------------------------------------------------------

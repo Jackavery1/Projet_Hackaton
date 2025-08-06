@@ -12,7 +12,7 @@ JWT_SECRET = code secret || "respirer_de_la_compote-ça-fait-tousser"
 
 -----------------------------------------------------------------
 Client : Ejs Tailwind
-Tailwind : npx @tailwindcss/cli -i ./views/input.css -o ./views/styles.css --watch
+Tailwind : npx @tailwindcss/cli -i ./public/input.css -o ./public/styles.css --watch
 ```
 
 global : views/partials/header.ejs views/partials/formBox.ejs

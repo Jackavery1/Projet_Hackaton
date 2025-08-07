@@ -3,24 +3,6 @@ const router = express.Router();
 const controleurs = require("../controllers/controllers");
 const isAuth = require("../middleware/isAuth");
 
-// Routes login/inscription
-const controleurs = require('../controllers/controllers.js'); // Importe TOUTES les fonctions du contrôleur sous un seul nom
-
-// --- Routes pour les idées ---
-router.post('/api/idees', controleurs.creerIdee);
-router.get('/api/idees', controleurs.listerIdees);
-router.delete('/api/idees/:id', controleurs.supprimerIdee);
-
-// --- Routes pour les commentaires ---
-router.post('/api/idees/:id/commentaire', controleurs.ajouterCommentaire);
-router.delete('/api/idees/:id/commentaires/:commentaireId', controleurs.supprimerCommentaire);
-
-// --- Routes pour les likes ---
-router.post('/api/idees/:id/like', controleurs.likerIdee); // Liker une idée
-router.post('/api/idees/:id/deletelike', controleurs.supprimerLikeIdee); // Supprimer un like d'une idée
-router.post('/api/idees/:ideeId/commentaires/:commentaireId/like', controleurs.likerCommentaire); // Liker un commentaire
-router.post('/api/idees/:ideeId/commentaires/:commentaireId/deletelike', controleurs.supprimerLikeCommentaire); // Supprimer un like d'un commentaire
-
 // --- Routes pour les vues (si vous utilisez EJS) ---
 router.get("/", controleurs.afficherLogin);
 router.post("/api/login", controleurs.login);

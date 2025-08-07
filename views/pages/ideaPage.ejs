@@ -25,9 +25,9 @@
                     </button>
                 </form>
 
-                <h2 class="text-center text-4xl font-black">
+                <h1 class="text-center text-4xl font-black">
                     <%= idea.name %>
-                </h2>
+                </h1>
 
                 <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
                     <button type="submit"

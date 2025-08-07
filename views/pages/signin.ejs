@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -53,6 +53,80 @@
                 Se connecter
             </a>
             
+        </div>
+
+    </main>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body class="size-full">
+
+    <main class="relative flex flex-col justify-start w-5xl mx-auto">
+
+        <div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center">
+
+            <h4 class="text-center text-black text-3xl font-bold mb-4">
+                Créer un compte
+            </h4>
+
+         
+            <form action="/api/login" method="post" class="flex flex-col text-black" role="form">
+           
+                <label for="nomUtilisateur" class="text-xl font-medium mb-2">
+                    Nom
+                </label>
+                <!-- 
+                    L'attribut autocomplete="username" aide les navigateurs
+                    et les gestionnaires de mots de passe à remplir le champ
+                    automatiquement, ce qui est un gain de temps pour l'utilisateur.
+                -->
+                <input type="text" name="nomUtilisateur" id="nomUtilisateur" class="bg-slate-300 rounded-2xl p-3 text-lg"
+                    placeholder="Votre nom" required autocomplete="username">
+
+                <label for="motDePasse" class="text-xl font-medium mb-2">
+                    Mot de passe
+                </label>
+                <!-- 
+                    L'attribut autocomplete="current-password" est utilisé pour
+                    suggérer au navigateur de pré-remplir le champ avec le
+                    mot de passe actuel de l'utilisateur.
+                -->
+                <input type="password" name="motDePasse" id="motDePasse" class="bg-slate-300 rounded-2xl p-3 text-lg"
+                    placeholder="******" required autocomplete="current-password">
+
+                <label for="confirmerMotDePasse" class="text-xl font-medium mb-2">
+                    Confirmer Mot de passe
+                </label>
+                <!-- 
+                    L'attribut autocomplete="new-password" est utilisé ici pour
+                    indiquer que ce champ est destiné à la création d'un nouveau mot de passe.
+                -->
+                <input type="password" name="confirmerMotDePasse" id="confirmerMotDePasse"
+                    class="bg-slate-300 rounded-2xl p-3 text-lg" placeholder="******" required autocomplete="new-password">
+
+                <button type="submit"
+                    class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
+                    Créer un compte
+                </button>
+            </form>
+
+            <hr class="mt-4">
+            <a href="/"
+                class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
+                Se connecter
+            </a>
         </div>
 
     </main>

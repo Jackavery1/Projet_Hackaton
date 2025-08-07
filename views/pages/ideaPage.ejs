@@ -14,7 +14,7 @@
 
     <%- include('../partials/header'); %>
 
-        <main class="relative ml-[11vw] w-[89vw] flex flex-col justify-start">
+        <main class="relative w-full flex flex-col justify-start mr-5">
 
             <div class="flex justify-center items-center mb-5">
 
@@ -25,9 +25,9 @@
                     </button>
                 </form>
 
-                <h2 class="text-center text-4xl font-black">
+                <h1 class="text-center text-4xl font-black">
                     <%= idea.name %>
-                </h2>
+                </h1>
 
                 <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
                     <button type="submit"
@@ -38,7 +38,7 @@
 
             </div>
 
-            <div class="w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 rounded-xl bg-orange-500">
+            <div class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 rounded-xl bg-orange-500">
 
                 <p class="text-lg text-black font-bold">
                     <%= idea.content %>
@@ -53,7 +53,7 @@
 
             <%- include('../partials/formBox', {form_type: "comment", idea: idea }); %>
 
-                <ul class="w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
+                <ul class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 items-center">
                     <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea: idea}) ))
                         %>
                 </ul>

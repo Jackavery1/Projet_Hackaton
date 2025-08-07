@@ -1,8 +1,8 @@
 <!-- <div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto">
 
-    <h4 class="text-center text-black text-3xl font-bold mb-4">
+    <h2 class="text-center text-black text-3xl font-bold mb-4">
         <%= form_type=="idea" ? "Proposer une nouvelle idée" : "Écrire un commentaire" %>
-    </h4>
+    </h2>
 
     <form action=<%= form_type=="idea" ? "/api/idees" : "/api/idees/" + idea.id + "/commentaire" %> method="post" class="flex flex-col text-black">
 

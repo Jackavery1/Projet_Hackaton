@@ -15,17 +15,20 @@
         formulaire (par ex., "Proposer une nouvelle idée") dès que
         l'utilisateur se concentre dessus, améliorant la navigation.
     -->
-    <form action=<%= form_type=="idea" ? "/api/idees" : "/api/idees/" + idea.id + "/commentaire" %> method="post" class="flex flex-col text-black">
+    <form action=<%=form_type=="idea" ? "/api/idees" : "/api/idees/" + idea.id + "/commentaire" %> method="post"
+        class="flex flex-col text-black">
 
-        <label for="category" class="text-xl font-medium mb-2">
-            Categorie
-        </label>
-        <input type="text" name="category" id="category" class="bg-slate-300 rounded-2xl p-3 text-lg">
+        <div class="flex flex-col <%= form_type=="idea" ? "visible" : "hidden" %>">
+            <label for="category" class="text-xl font-medium mb-2">
+                Categorie
+            </label>
+            <input type="text" name="category" id="category" class="bg-slate-300 rounded-2xl p-3 text-lg">
+        </div>
 
-        <label for=<%=form_type %> class="text-xl font-medium mb-2">
+        <label for=<%=form_type %> class="text-xl font-medium mt-3 mb-2">
             <%= form_type=="idea" ? "Idée" : "Commentaire" %>
         </label>
-        <textarea name=<%=form_type %> id=<%= form_type %> class="bg-slate-300 rounded-2xl p-3 text-lg"></textarea>
+        <textarea name=<%=form_type %> id=<%=form_type %> class="bg-slate-300 rounded-2xl p-3 text-lg"></textarea>
 
         <button type="submit"
             class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">

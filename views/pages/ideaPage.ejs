@@ -50,6 +50,11 @@
 
             </div>
 
+            <h2 class="text-center text-xl font-bold mb-5" aria-label="Categorie : <%= idea.category %>">
+                <%= idea.category %>
+            </h2>
+            <hr class="mb-5">
+
             <div class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 rounded-xl bg-orange-500">
 
                 <p class="text-lg text-black font-bold">
@@ -62,21 +67,22 @@
                 </p>
 
             </div>
+            <hr class="mb-5">
 
             <%- include('../partials/formBox', {form_type: "comment" , idea: idea }); %>
 
-            <!-- 
+                <!-- 
                 L'aria-label sur la balise <ul> donne un titre descriptif à la liste.
                 Cela aide les utilisateurs de lecteurs d'écran à savoir qu'ils parcourent
                 une "Liste des commentaires" plutôt que de simplement entendre
                 "liste de X éléments".
             -->
-            <ul aria-label="Liste des commentaires pour l'idée : <%= idea.name %>"
-                class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
-                <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea:
-                    idea}) ))
-                    %>
-            </ul>
+                <ul aria-label="Liste des commentaires pour l'idée : <%= idea.name %>"
+                    class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
+                    <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea:
+                        idea}) ))
+                        %>
+                </ul>
 
         </main>
 

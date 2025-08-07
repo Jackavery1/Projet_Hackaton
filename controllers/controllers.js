@@ -257,12 +257,12 @@ exports.afficherSignin = (req, res) => {
 };
 
 exports.afficherIdeaList = (req, res) => {
-    let ideas = [{ "id": 1, "name": "Patate", "content": "Patate" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre" }];
+    let ideas = [{ "id": 1, "name": "Patate", "content": "Patate", "category": "Tubercule" }, { "id": 2, "name": "Pomme de terre", "content": "Pomme de terre", "category": "Tubercule" }];
     res.render("pages/ideaList", { ideas: ideas });
 };
 
 exports.afficherIdeaPage = (req, res) => {
-    let idea = { "id": 1, "name": "Patate", "content": "Patate", "likes": 13, "comments": [{"id": 1, "name": "Patrick", "content": "C'est bien."}, {"id": 2, "name": "Patrick", "content": "C'est nul."}] };
+    let idea = { "id": 1, "name": "Patate", "content": "Patate", "category": "Tubercule", "likes": 13, "comments": [{"id": 1, "name": "Patrick", "content": "C'est bien."}, {"id": 2, "name": "Patrick", "content": "C'est nul."}] };
     res.render("pages/ideaPage", { idea: idea })
 }
 

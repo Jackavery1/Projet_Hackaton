@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -40,6 +40,101 @@
             </form>
 
             <hr class="mt-4">
+            <a href="/signin"
+                class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
+                Créer un compte
+            </a>
+        </div>
+
+    </main>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body class="size-full">
+
+    <!-- 
+        Salut ! On commence avec la balise <main>. C'est un peu le cœur de ta page,
+        l'endroit où se trouve le contenu le plus important. C'est super pour l'accessibilité
+        parce que ça aide les personnes qui utilisent des lecteurs d'écran à trouver
+        directement ce qui les intéresse, sans passer par les menus ou le pied de page.
+    -->
+    <main class="relative flex flex-col justify-start w-5xl mx-auto">
+
+        <!-- 
+            Ici, on a la boîte qui contient ton formulaire. J'ai ajouté un attribut
+            'role="region"' pour dire que c'est une zone importante et 'aria-labelledby'
+            pour lier cette zone à son titre. C'est comme si on disait aux lecteurs
+            d'écran : "Hé, ce qui suit est un formulaire, et son titre est juste en dessous !"
+        -->
+        <div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center"
+             role="region" aria-labelledby="form-title">
+
+            <!--
+                On a changé le <h4> en <h2>. C'est important d'avoir une hiérarchie de titres
+                logique sur la page. Pensez-y comme à un plan : tu commences avec le <h1> pour le
+                titre principal, puis <h2> pour les grandes sections, <h3> pour les sous-sections, etc.
+                Ça rend la structure de la page plus claire pour tout le monde.
+                On lui a aussi mis un 'id' pour qu'il puisse être lié à notre boîte ci-dessus.
+            -->
+            <h2 id="form-title" class="text-center text-black text-3xl font-bold mb-4">
+                Se connecter
+            </h2>
+
+            <form action="/api/login" method="post" class="flex flex-col text-black">
+
+                <!-- 
+                    C'est parfait ! Vos <label> sont déjà bien connectés à vos <input> grâce aux
+                    attributs 'for' et 'id'. C'est une excellente pratique qui rend le formulaire
+                    facile à utiliser, surtout pour ceux qui naviguent au clavier.
+                -->
+                <label for="nomUtilisateur" class="text-xl font-medium mb-2">
+                    Nom d'utilisateur
+                </label>
+                <input type="text" name="nomUtilisateur" id="nomUtilisateur" class="bg-slate-300 rounded-2xl p-3 text-lg"
+                    placeholder="Votre nom" required>
+
+                <label for="motDePasse" class="text-xl font-medium mb-2">
+                    Mot de passe
+                </label>
+                <!-- 
+                    Pour le mot de passe, j'ai juste ajouté un petit quelque chose :
+                    'autocomplete="current-password"'. Ça aide les navigateurs à reconnaître
+                    qu'il s'agit du champ de mot de passe actuel de l'utilisateur, ce qui permet
+                    aux gestionnaires de mots de passe de mieux fonctionner. C'est un petit plus
+                    qui améliore grandement l'expérience utilisateur !
+                -->
+                <input type="password" name="motDePasse" id="motDePasse" class="bg-slate-300 rounded-2xl p-3 text-lg"
+                    placeholder="******" required autocomplete="current-password">
+
+                <!-- 
+                    Le bouton est clair, il a une fonction (type="submit") et il est bien
+                    lisible. Rien à ajouter ici, c'est parfait.
+                -->
+                <button type="submit"
+                    class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
+                    Se connecter
+                </button>
+                
+            </form>
+
+            <hr class="mt-4">
+            <!-- 
+                Et pour finir, le lien pour créer un compte. On utilise bien une balise <a>
+                parce que c'est une action de navigation, pas une soumission de formulaire.
+                C'est le bon choix sémantique.
+            -->
             <a href="/signin"
                 class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
                 Créer un compte

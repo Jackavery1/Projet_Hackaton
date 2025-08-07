@@ -2,14 +2,10 @@
     J'ai ajouté un aria-label pour donner un nom descriptif au lecteur d'écran,
     ce qui permet à l'utilisateur de comprendre la fonction de cette section.
 -->
-<header
-  aria-label="Navigation principale"
-  class="relative top-0 left-0 w-[10vw] min-w-[200px] h-[100vh] pt-5 pb-4 px-4 mr-8 flex flex-col justify-between text-center bg-amber-500 z-50"
->
+<header aria-label="Navigation principale"
+  class="relative top-0 left-0 w-[10vw] min-w-[200px] h-[100vh] pt-5 pb-4 px-4 mr-8 flex flex-col justify-between text-center bg-amber-500 z-50">
   <div class="flex flex-col items-stretch space-y-4">
-    <h4
-      class="text-center font-black text-xl text-black bg-orange-500 p-3 rounded-2xl mt-3 mb-4"
-    >
+    <h4 class="text-center font-black text-xl text-black bg-orange-500 p-3 rounded-2xl mt-3 mb-4">
       Boîte à idées inclusives
     </h4>
 
@@ -23,11 +19,8 @@
             d'écran puissent annoncer clairement l'action.
         -->
     <form action="/logout" method="post">
-      <button
-        type="submit"
-        aria-label="Se déconnecter de votre compte"
-        class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl p-3 text-sm font-black w-fit self-center"
-      >
+      <button type="submit" aria-label="Se déconnecter de votre compte"
+        class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl p-3 text-sm font-black w-fit self-center">
         Se déconnecter
       </button>
     </form>
@@ -42,12 +35,8 @@
                 J'ai ajouté un aria-label pour une description plus précise
                 de la destination pour les utilisateurs de lecteurs d'écran.
             -->
-      <a
-        href="/listeidee"
-        aria-label="Aller à la liste d'idées"
-        class="text-black font-bold text-xl p-3 rounded-2xl hover:bg-orange-500"
-        >Liste d'idées</a
-      >
+      <a href="/listeidee" aria-label="Aller à la liste d'idées"
+        class="text-black font-bold text-xl p-3 rounded-2xl hover:bg-orange-500">Liste d'idées</a>
     </nav>
   </div>
 

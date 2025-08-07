@@ -1,12 +1,11 @@
-let selectionArray = null; let selectionLooper; let selectionCursor = 0;
+let selectionArray = document.querySelectorAll("li"); let selectionCursor = -1;
 let keyboardSelected = false;
 
-selectionArray = document.querySelectorAll("li");
-selectionLooper = setInterval(selectionLoop, 200);
+let selectionLooper = setInterval(selectionLoop, 200);
 
 window.addEventListener("keydown", (event) => {
     const key = event.key.toLocaleLowerCase();
-    if (selectionArray == null) {
+    if (prevent_Keyboard_Conflict) {
         return;
     } else if (!keyboardSelected) { // Initialize keyboard and return before being able to use it. So that it start on the first option.
         keyboardSelected = true;
@@ -14,19 +13,23 @@ window.addEventListener("keydown", (event) => {
     }
     switch (key) {
         case "enter":
-            window.location.href = selectionArray[selectionCursor].childNodes[1].href;
+            if (selectionCursor == -1) return;
+            window.location.href = selectionArray[selectionCursor].childNodes[1].href; // Go to the page
+            break;
+        case " ":
+            selectionArray[selectionCursor].childNodes[1].childNodes[5].submit(); // Like / Unlike
             break;
         case "arrowup":
         case "z":
             event.preventDefault();
             --selectionCursor;
-            if (selectionCursor < 0) selectionCursor = selectionArray.length - 1;
+            if (selectionCursor < -1) selectionCursor = selectionArray.length - 1;
             break;
         case "arrowdown":
         case "s":
             event.preventDefault();
             ++selectionCursor;
-            if (selectionCursor > selectionArray.length - 1) selectionCursor = 0;
+            if (selectionCursor > selectionArray.length - 1) selectionCursor = -1;
             break;
     }
 });
@@ -37,13 +40,6 @@ function selectionLoop() {
         element.classList.remove("selected");
     })
 
-    if (selectionArray == null) {
-        selectionLooper = null;
-        selectionCursor = 0;
-        keyboardSelected = false;
-        return;
-    }
-
-    if (keyboardSelected) selectionArray[selectionCursor].classList.add("selected");
+    if (keyboardSelected && selectionCursor > -1) selectionArray[selectionCursor].classList.add("selected");
 
 }

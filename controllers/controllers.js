@@ -33,86 +33,142 @@ exports.listerIdees = async (req, res) => {
         console.error("Erreur lors de la récupération des idées :", error);
         res.status(500).json({ message: 'Erreur serveur lors de la récupération des idées.' });
     }
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const { Utilisateur, Idee } = require("../models/models");
+const isAuth = require("../middleware/isAuth");
+
+// Rendu des vues EJS
+exports.afficherLogin = (req, res) => res.render("pages/login");
+exports.afficherSignin = (req, res) => res.render("pages/signin");
+
+exports.afficherIdeaList = async (req, res) => {
+  try {
+    const ideas = await Idee.find();
+    res.render("pages/ideaList", {
+      ideas,
+      utilisateurConnecte: req.session.utilisateur,
+    });
+  } catch (err) {
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-// Fonction pour supprimer une idée par son ID
-exports.supprimerIdee = async (req, res) => {
-    try {
-        // Trouve et supprime une idée par son ID, passé dans les paramètres de l'URL.
-        const idee = await Idee.findByIdAndDelete(req.params.id);
-        // Si l'idée n'est pas trouvée, renvoie un statut 404 (Not Found).
-        if (!idee) {
-            return res.status(404).json({ message: "Idée non trouvée."});
-        }
-        // Renvoie un message de succès avec un statut 200.
-        res.status(200).json({ message: "Idée supprimée avec succès."});
-    } catch(error) {
-        // En cas d'erreur, log l'erreur et renvoie un statut 500.
-        console.error("Erreur lors de la suppression de l'idée :", error);
-        res.status(500).json({ message: "Erreur serveur."})
-    }
+exports.afficherIdeaPage = async (req, res) => {
+  try {
+    const idea = await Idee.findById(req.params.id);
+    if (!idea) return res.status(404).send("Idée non trouvée");
+    res.render("pages/ideePage", {
+      idea,
+      utilisateurConnecte: req.session.utilisateur,
+    });
+  } catch (err) {
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-// --- Fonctions pour les commentaires ---
-
-// Fonction pour ajouter un commentaire à une idée spécifique
-exports.ajouterCommentaire = async (req, res) => {
-    try {
-        // Trouve l'idée par son ID.
-        const idee = await Idee.findById(req.params.id);
-        // Si l'idée n'est pas trouvée, renvoie un statut 404.
-        if (!idee) {
-            return res.status(404).json({ message: 'Idée non trouvée.' });
-        }
-        // Ajoute un nouveau commentaire au tableau 'commentaires' de l'idée.
-        idee.commentaires.push({ texte: req.body.texte });
-        // Sauvegarde l'idée mise à jour.
-        await idee.save();
-        // Renvoie l'idée complète avec le nouveau commentaire, statut 200.
-        res.status(200).json(idee);
-    } catch (error) {
-        // En cas d'erreur, log l'erreur et renvoie un statut 500.
-        console.error("Erreur lors de l'ajout du commentaire :", error);
-        res.status(500).json({ message: 'Serveur HS.' });
-    }
+// Authentification
+exports.register = async (req, res) => {
+  const { nomUtilisateur, motDePasse } = req.body;
+  try {
+    const hash = await bcrypt.hash(motDePasse, 10);
+    const nouvelUtilisateur = new Utilisateur({
+      nomUtilisateur,
+      motDePasse: hash,
+    });
+    await nouvelUtilisateur.save();
+    res.redirect("/");
+  } catch (err) {
+    res.status(500).send("Erreur lors de l’inscription");
+  }
 };
 
-// Fonction pour supprimer un commentaire spécifique d'une idée
-exports.supprimerCommentaire = async (req, res) => {
-    try {
-        // Trouve l'idée parente par son ID.
-        const idee = await Idee.findById(req.params.id);
-        // Si l'idée n'est pas trouvée, renvoie un statut 404.
-        if (!idee) {
-            return res.status(404).json({ message: "Idée non trouvée." });
-        }
-        // Récupère l'ID du commentaire à supprimer depuis les paramètres de l'URL.
-        const commentaireId = req.params.commentaireId;
+exports.login = async (req, res) => {
+  const { nomUtilisateur, motDePasse } = req.body;
+  try {
+    const utilisateur = await Utilisateur.findOne({ nomUtilisateur });
+    if (!utilisateur) return res.redirect("/");
 
-        // Stocke la longueur actuelle du tableau de commentaires pour vérifier si un commentaire a été supprimé.
-        const commentairesAvantSuppression = idee.commentaires.length;
-        // Filtre le tableau de commentaires pour exclure celui dont l'ID correspond.
-        idee.commentaires = idee.commentaires.filter(c => c._id.toString() !== commentaireId);
+    const match = await bcrypt.compare(motDePasse, utilisateur.motDePasse);
+    if (!match) return res.redirect("/");
+    req.session.utilisateur = utilisateur;
+    res.redirect("/listeidee");
+  } catch (err) {
+    res.status(500).send("Erreur lors de la connexion");
+  }
+};
 
-        // Si la longueur du tableau n'a pas changé, le commentaire n'a pas été trouvé.
-        if (idee.commentaires.length === commentairesAvantSuppression) {
-            return res.status(404).json({ message: "Commentaire non trouvé." });
-        }
+// CRUD Idées
+exports.creerIdee = async (req, res) => {
+  const { titre, description, category } = req.body;
+  try {
+    const nouvelleIdee = new Idee({
+      titre,
+      description,
+      commentaires: [],
+      likes: 0,
+    });
+    await nouvelleIdee.save();
+    res.redirect("/listeidee");
+  } catch (err) {
+    res.status(500).send("Erreur lors de la création");
+  }
+};
 
-        // Sauvegarde l'idée avec le commentaire supprimé.
-        await idee.save();
-        // Renvoie l'idée mise à jour avec un statut 200.
-        res.status(200).json(idee);
-    } catch (error) {
-        // En cas d'erreur, log l'erreur et renvoie un statut 500.
-        console.error("Erreur lors de la suppression du commentaire :", error);
-        res.status(500).json({ message: "Erreur serveur." });
-    }
+exports.listerIdees = async (req, res) => {
+  try {
+    const ideas = await Idee.find();
+    res.json(ideas);
+  } catch (err) {
+    res.status(500).send("Erreur serveur");
+  }
 };
 
 // --- Fonctions pour les likes (idées et commentaires) ---
 
 // Fonction pour liker une idée (incrémenter le compteur de likes)
+
+exports.supprimerIdee = async (req, res) => {
+  try {
+    await Idee.findByIdAndDelete(req.params.id);
+    res.redirect("/listeidee");
+  } catch (err) {
+    res.status(500).send("Erreur suppression");
+  }
+};
+
+// Commentaires
+exports.ajouterCommentaire = async (req, res) => {
+  const { texte } = req.body;
+  try {
+    const idee = await Idee.findById(req.params.id);
+    if (!idee) return res.status(404).send("Idée non trouvée");
+
+    idee.commentaires.push({ texte, likes: 0 });
+    await idee.save();
+
+    res.redirect("/idee/" + req.params.id);
+  } catch (err) {
+    res.status(500).send("Erreur ajout commentaire");
+  }
+};
+
+exports.supprimerCommentaire = async (req, res) => {
+  const { id, commentaireId } = req.params;
+  try {
+    const idee = await Idee.findById(id);
+    if (!idee) return res.status(404).send("Idée non trouvée");
+
+    idee.commentaires.splice(commentaireId, 1);
+    await idee.save();
+
+    res.redirect("/idee/" + id);
+  } catch (err) {
+    res.status(500).send("Erreur suppression commentaire");
+  }
+};
+
+// Likes
 exports.likerIdee = async (req, res) => {
     try {
         // Récupère l'ID de l'idée depuis les paramètres de l'URL.
@@ -159,9 +215,23 @@ exports.supprimerLikeIdee = async (req, res) => {
         console.error("Erreur lors de la suppression du like :", error);
         res.status(500).json({ message: "Erreur serveur." });
     }
+  try {
+    await Idee.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
+    res.redirect("/idee/" + req.params.id);
+  } catch (err) {
+    res.status(500).send("Erreur like idée");
+  }
 };
 
-// Fonction pour liker un commentaire spécifique
+exports.supprimerLike = async (req, res) => {
+  try {
+    await Idee.findByIdAndUpdate(req.params.id, { $inc: { likes: -1 } });
+    res.redirect("/idee/" + req.params.id);
+  } catch (err) {
+    res.status(500).send("Erreur unlike idée");
+  }
+};
+
 exports.likerCommentaire = async (req, res) => {
     try {
         // Récupère l'ID de l'idée parente et l'ID du commentaire depuis les paramètres de l'URL.
@@ -448,3 +518,17 @@ exports.afficherIdeaPage = (req, res) => {
 //         res.status(500).json({ message: 'Serveur pourris.' });
 //     }
 // };
+  const { ideeId, commentaireId } = req.params;
+  try {
+    const idee = await Idee.findById(ideeId);
+    if (!idee) return res.status(404).send("Idée non trouvée");
+
+    const commentaire = idee.commentaires[commentaireId];
+    if (commentaire) commentaire.likes++;
+
+    await idee.save();
+    res.redirect("/idee/" + ideeId);
+  } catch (err) {
+    res.status(500).send("Erreur like commentaire");
+  }
+};

@@ -18,7 +18,7 @@
 
             <div class="flex justify-center items-center mb-5">
 
-                <form action=<%="/api/idees/" + idea.id %> method="delete">
+                <form action="/api/idees/<%= idea._id %>?_method=DELETE" method="POST"></form>
                     <!-- 
                         L'aria-label fournit une description pour les lecteurs d'écran. Au lieu de lire
                         seulement "X", il annoncera "Supprimer l'idée : [nom de l'idée]". 

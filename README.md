@@ -1,128 +1,113 @@
-# Projet Hackathon
+# Boîte à Idées Inclusives
 
-npm install
-npm run dev
+## Description
 
------------------------------------------------------------------
-Config .env
+Cette application permet à tout le monde de déposer, consulter et voter pour des idées afin de favoriser l'inclusion dans notre communauté.
 
-PORT = PORT || 3000  
-MONGODB_URI = URL MongoDB || "mongodb+srv://jorisdavidmartinez:E8AGwAYsLXzYA6ZL@projethackaton.6s34drf.mongodb.net/"  
-JWT_SECRET = code secret || "respirer_de_la_compote-ça-fait-tousser"
+L’objectif est de recueillir des suggestions diverses dans un environnement accessible, simple d'utilisation et convivial.
 
------------------------------------------------------------------
-Client : Ejs Tailwind
-Tailwind : npx @tailwindcss/cli -i ./public/input.css -o ./public/styles.css --watch
+### 🎯 Accessibilité
+
+L’accessibilité est au cœur du projet. L’application a été conçue pour être utilisable par toutes et tous, y compris les personnes en situation de handicap.  
+Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) (niveau AA), notamment :
+
+- Navigation au clavier  
+- Contrastes suffisants  
+- Hiérarchie claire des titres  
+- Formulaires lisibles avec labels  
+- Textes lisibles et structurés  
+
+---
+
+## Technologies utilisées
+
+- **Frontend :**  
+
+  Utilisation des templates EJS (Embedded JavaScript) pour générer les pages HTML dynamiquement côté serveur. Cela permet une interface légère, sans framework frontend complexe.
+
+- **Backend :**  
+
+  API REST construite avec Node.js et Express, qui gère les idées, les utilisateurs, et les votes.
+
+- **Base de données :**  
+
+  MongoDB, utilisée pour stocker les idées et les utilisateurs.
+
+- **Authentification :**  
+
+- **Déploiement :**  
+
+  L’application est exécutée **en local** pour le moment. Le code source est disponible sur [GitHub](https://github.com/ton-utilisateur/ton-projet).
+
+---
+
+## Fonctionnalités principales
+
+- 💡 Soumission d’idées via un formulaire simple et intuitif  
+- 📋 Consultation de la liste des idées soumises  
+- ❤️ Vote (like) sur les idées préférées    
+- ♿ Interface accessible pour tous les profils d’utilisateurs  
+
+---
+
+## Installation & déploiement
+
+### Prérequis
+
+- [Node.js](https://nodejs.org/) installé  
+- [Git](https://git-scm.com/) installé  
+- Accès à une base de données MongoDB (exemple : [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+
+### Étapes
+
+1. **Cloner le dépôt depuis GitHub**  
+```bash
+    git clone https://github.com/ton-utilisateur/ton-projet.git
 ```
-
-/ : views/pages/login.ejs
-|
-|__/signin : views/pages/signin.ejs
-|
-|   global : views/partials/header.ejs views/partials/formBox.ejs
-|
-|__/listeidee : views/pages/ideaList.ejs views/partials/componentIdeaList.ejs
-  |
-  |__/idee/:id : views/pages/ideaPage.ejs views/partials/componentComment.ejs
-
+2. **Aller dans le dossier du projet**
+```bash
+    cd ton-projet
 ```
-
------------------------------------------------------------------
-Server : NodeJS Express
-Base de données : MongoDB 
+3. **Installer les dépendances :** 
+```bash
+    npm install
 ```
-
+4. **Configurer les variables d’environnement en créant un fichier .env à la racine du projet et y ajouter :**
+```bash
+    DB_URL=ton_url_de_bdd
+    PORT=3000
 ```
-
------------------------------------------------------------------
+5. **Lancer l’application en local :** 
+```bash
+    npm start
 ```
-Pour les routes POST avec ThunderClient:
-
-Pour ajouter une idée
-Selectionez POST dans le menu déroulant à gauche de l'URL
-Puis dans l'URL mettre (http://localhost:3000/api/idees)
-Puis allez dans Body, selectionnez le type JSON et collez une idée
-{
-  "titre": "L'idée la plus absurde du monde",
-  "description": "Créer un service de livraison de chaussettes dépareillées à domicile, pour ceux qui aiment le frisson de l'inconnu chaque matin."
-}
-Cliquez sur send, le resultat attendu:
-{
-  "titre": "L'idée la plus absurde du monde",
-  "description": "Créer un service de livraison de chaussettes dépareillées à domicile, pour ceux qui aiment le frisson de l'inconnu chaque matin.",
-  "likes": 0,
-  "_id": "6892fb756f7ba7a6907919e6",
-  "commentaires": [],
-  "__v": 0
-}
-
-Pour ajouter un commentaire
-Selectionnez POST dans le menu déroulant à gauche de l'URL
-Puis dans l'URL mettre (http://localhost:3000/api/idees/6892fb756f7ba7a6907919e6/commentaire)
-                        (     adresse normal           / id de l'idée          / commentaire) 
-Puis allez dans Body, selectionnez le type JSON et collez un commentaire
-{
-  "texte": "Ceci est un commentaire génial pour cette idée !"
-}
-Cliquez sur send, le resulat attendu:
-{
-  "_id": "6892fb756f7ba7a6907919e6",
-  "titre": "L'idée la plus absurde du monde",
-  "description": "Créer un service de livraison de chaussettes dépareillées à domicile, pour ceux qui aiment le frisson de l'inconnu chaque matin.",
-  "likes": 0,
-  "commentaires": [
-    {
-      "texte": "Ceci est un commentaire génial pour cette idée !",
-      "likes": 0,
-      "_id": "6893025b6f7ba7a6907919e9"
-    }
-  ],
-  "__v": 1
-}
-
-Pour like une idée
-Selectionnez POST dans le menu déroulant à gauche de l'URL
-Puis dans l 'URL mettre (http://localhost:3000/api/idees/6892fb756f7ba7a6907919e6/like)
-                        (adresse normal               /  id de l 'idée           /like)
-Ne rien mettre dans le body
-Cliquez sur send, le resultat attendu:
-{
-  "_id": "6892fb756f7ba7a6907919e6",
-  "titre": "L'idée la plus absurde du monde",
-  "description": "Créer un service de livraison de chaussettes dépareillées à domicile, pour ceux qui aiment le frisson de l'inconnu chaque matin.",
-  "likes": 1,  <======= ajout d'un like sur une idée✅
-  "commentaires": [
-    {
-      "texte": "Ceci est un commentaire génial pour cette idée !",
-      "likes": 0,
-      "_id": "6893025b6f7ba7a6907919e9"
-    }
-  ],
-  "__v": 1
-}
-
-Pour like un commentaire
-Selectionnez POST dans le menu déroulant à gauche de l'URL
-Puis dans l'URL mettre (http://localhost:3000/api/idees/6892fb756f7ba7a6907919e6/commentaires/6893025b6f7ba7a6907919e9/like)
-                       ( adresse normal                / id de l'idée           /commentaires/ id du commentaire     / like)
-Ne rien mettre dans le body
-Cliquez sur send, le resultat attendu:
-{
-  "_id": "6892fb756f7ba7a6907919e6",
-  "titre": "L'idée la plus absurde du monde",
-  "description": "Créer un service de livraison de chaussettes dépareillées à domicile, pour ceux qui aiment le frisson de l'inconnu chaque matin.",
-  "likes": 1,
-  "commentaires": [
-    {
-      "texte": "Ceci est un commentaire génial pour cette idée !",
-      "likes": 1, <=============ajout d'un like sur le commentaire✅
-      "_id": "6893025b6f7ba7a6907919e9"
-    }
-  ],
-  "__v": 1
-}
-Pour supprimer un like il faut la methode POST
-Selectionnez POST dans le menu déroulant à gauche de l'URL
-
-Et puis voila tu sais tout maintenant tu te débrouille !!!!!!!!! Allez bisous.
+6. **Ouvrir votre navigateur à l’adresse :**
+```bash
+    http://localhost:3000
 ```
+## Contribution
+
+Les contributions sont les bienvenues !
+Si vous souhaitez participer :
+
+  1. Forkez ce dépôt
+
+  2. Créez une branche dédiée (git checkout -b feature-nouvelle-fonctionnalité)
+
+  3. Commitez vos modifications (git commit -m 'Ajout d'une nouvelle fonctionnalité')
+
+  4. Poussez votre branche (git push origin feature-nouvelle-fonctionnalité)
+
+  5. Ouvrez une Pull Request
+
+## Contact
+
+Pour toute question, suggestion ou retour d’expérience, vous pouvez me contacter à : [jorisdavid.martinez@gmail.com](mailto:jorisdavid.martinez@gmail.com)
+
+## Licence
+
+Ce projet utilise la licence **ISC** telle que déclarée dans le fichier `package.json`.
+
+Le texte complet de la licence pourra être ajouté ultérieurement dans un fichier dédié.
+README.md
+4 Ko

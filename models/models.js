@@ -16,11 +16,19 @@ const schemaUtilisateur = new mongoose.Schema({
     nomUtilisateur: { type: String, required: true, unique: true },
     motDePasse: {type: String, required: true}
 });
+const categorieSchema = new mongoose.Schema({
+    nom: {
+        type: String,
+        required: true,
+        unique: true
+    }
+});
 const Idee = mongoose.model('Idee', IdeeSchema);
 const Utilisateur = mongoose.model('Utilisateur', schemaUtilisateur);
+const Categorie = mongoose.model('Categorie', categorieSchema);
 
-// Exportation du modèle
 module.exports = {
     Idee,
-    Utilisateur
+    Utilisateur,
+    Categorie
 };

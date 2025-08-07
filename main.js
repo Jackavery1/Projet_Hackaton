@@ -2,13 +2,15 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const connecterBaseDeDonnees = require("./database/database.js");
-const router = require("./routes/routes.js");
 const path = require("path");
+
+const connecterBaseDeDonnees = require('./database/database.js');
+const ideesRoutes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
+
 const PORT = process.env.PORT || 3000;
 const session = require("express-session");
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,10 +28,10 @@ app.use(
   })
 );
 
-//Utilisation router
-app.use("/", router);
+app.use('/idees', ideesRoutes);
+app.use('/categories', routes); 
+app.use('/', routes);
 
-//Appel BD
 connecterBaseDeDonnees();
 
 app.listen(PORT, () => {

@@ -3,7 +3,7 @@ const router = express.Router();
 const controleurs = require("../controllers/controllers");
 const isAuth = require("../middleware/isAuth");
 
-// Routes login/inscription
+// --- Routes pour les vues (si vous utilisez EJS) ---
 router.get("/", controleurs.afficherLogin);
 router.post("/api/login", controleurs.login);
 
@@ -32,7 +32,7 @@ router.delete(
 
 // Routes Likes
 router.post("/api/idees/:id/like", isAuth, controleurs.likerIdee);
-router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLike);
+router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLikeIdee);
 router.post(
   "/api/idees/:ideeId/commentaires/:commentaireId/like",
   isAuth,
@@ -45,5 +45,14 @@ router.post("/logout", (req, res) => {
     res.redirect("/");
   });
 });
+router.get("/listeidee", controleurs.afficherIdeaList);
+router.get("/idee/:id", controleurs.afficherIdeaPage);
+
+// --- Routes pour les catégories ----
+router.post('/api/categories', controleurs.creerCategorie);
+router.get('/api/categories', controleurs.getCategories);
+router.get('/api/categories/:id', controleurs.getCategorieById);
+router.put('/api/categories/:id', controleurs.mettreAJourCategorie);
+router.delete('/api/categories/:id', controleurs.supprimerCategorie);
 
 module.exports = router;

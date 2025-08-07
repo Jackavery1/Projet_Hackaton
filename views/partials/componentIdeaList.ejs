@@ -19,9 +19,10 @@
             pour la compréhension de l'utilisateur.
         -->
         <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like" ) %> method="post">
-            <button type="submit"
-                aria-label="<%= idea.like ? "Retirer votre j'aime pour cette idée" : "Aimer cette idée" %>"
-                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
+            <button type="submit" aria-label="<%= idea.like ? " Retirer votre j'aime pour cette idée"
+                : "Aimer cette idée" %>"
+                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem]
+                px-[0.6rem] text-3xl">
                 <%= idea.like ? "♥" : "♡" %>
             </button>
         </form>

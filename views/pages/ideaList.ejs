@@ -13,28 +13,28 @@
 
     <%- include('../partials/header'); %>
 
-    <!-- 
-        J'ai ajouté l'attribut `aria-labelledby` pour lier le contenu
-        principal au titre de la section, ce qui permet aux technologies
-        d'assistance de donner plus de contexte.
-    -->
-    <main class="relative w-full flex flex-col justify-start" aria-labelledby="main-heading">
-        <div class="w-full max-w-5xl mx-auto flex flex-col justify-start items-center">
+        <!-- 
+            J'ai ajouté l'attribut `aria-labelledby` pour lier le contenu
+            principal au titre de la section, ce qui permet aux technologies
+            d'assistance de donner plus de contexte.
+        -->
+        <main class="relative w-full flex flex-col justify-start" aria-labelledby="main-heading">
+            <div class="w-full max-w-5xl mx-auto flex flex-col justify-start items-center">
 
-            <%- include('../partials/formBox', { form_type: "idea" }); %>
+                <%- include('../partials/formBox', { form_type: "idea" }); %>
 
-            <!-- 
-                J'ai ajouté un `id="main-heading"` pour qu'il puisse
-                être référencé par le `aria-labelledby` de la balise <main>.
-            -->
-            <h1 id="main-heading" class="text-center text-4xl font-black mt-8 mb-5">Idées</h1>
+                    <!-- 
+                        J'ai ajouté un `id="main-heading"` pour qu'il puisse
+                        être référencé par le `aria-labelledby` de la balise <main>.
+                    -->
+                    <h1 id="main-heading" class="text-center text-4xl font-black mt-8 mb-5">Idées</h1>
 
-            <ul class="w-full mb-5">
-                <%- ideas.map((idea)=> ( include('../partials/componentIdeaList', { idea: idea }) )) %>
-            </ul>
+                    <ul class="w-full mb-5">
+                        <%- ideas.map((idea)=> ( include('../partials/componentIdeaList', { idea: idea }) )) %>
+                    </ul>
 
-        </div>
-    </main>
+            </div>
+        </main>
 
 </body>
 

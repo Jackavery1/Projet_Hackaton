@@ -12,33 +12,36 @@
 
     <main class="relative flex flex-col justify-start w-5xl mx-auto">
 
-        <div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center">
+        <h1 class="text-center font-black mb-8">Boîte à idées inclusives</h1>
 
-            <h4 class="text-center text-black text-3xl font-bold mb-4">
+        <div class="w-full max-w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center">
+
+            <h2 class="text-center text-black text-3xl font-bold mb-4">
                 Créer un compte
-            </h4>
+            </h2>
 
             <form action="/api/login" method="post" class="flex flex-col text-black">
-                <label for="nomUtilisateur" class="text-xl font-medium mb-2">
+
+                <label for="nomUtilisateur" class="text-xl font-medium mb-2 mt-5">
                     Nom
                 </label>
                 <input type="text" name="nomUtilisateur" id="nomUtilisateur" class="bg-slate-300 rounded-2xl p-3 text-lg"
                     placeholder="Votre nom" required>
 
-                <label for="motDePasse" class="text-xl font-medium mb-2">
+                <label for="motDePasse" class="text-xl font-medium mb-2 mt-5">
                     Mot de passe
                 </label>
                 <input type="password" name="motDePasse" id="motDePasse" class="bg-slate-300 rounded-2xl p-3 text-lg"
                     placeholder="******" required>
 
-                <label for="confirmerMotDePasse" class="text-xl font-medium mb-2">
+                <label for="confirmerMotDePasse" class="text-xl font-medium mb-2 mt-5">
                     Confirmer Mot de passe
                 </label>
                 <input type="password" name="confirmerMotDePasse" id="confirmerMotDePasse"
                     class="bg-slate-300 rounded-2xl p-3 text-lg" placeholder="******" required>
 
                 <button type="submit"
-                    class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
+                    class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-8 p-3 text-lg font-black w-fit self-center">
                     Créer un compte
                 </button>
                 
@@ -49,6 +52,7 @@
                 class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
                 Se connecter
             </a>
+            
         </div>
 
     </main>

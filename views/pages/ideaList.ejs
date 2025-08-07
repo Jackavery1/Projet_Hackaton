@@ -12,12 +12,12 @@
 
     <%- include('../partials/header'); %>
 
-        <main class="relative ml-[11vw] w-[89vw] flex flex-col justify-start">
-            <div class="w-5xl mx-auto flex flex-col justify-start items-center">
+        <main class="relative w-full flex flex-col justify-start mr-5">
+            <div class="w-full max-w-5xl mx-auto flex flex-col justify-start items-center">
 
                 <%- include('../partials/formBox', {form_type: "idea" }); %>
 
-                    <h2 class="text-center text-4xl font-black mt-8 mb-5">Idées</h2>
+                    <h1 class="text-center text-4xl font-black mt-8 mb-5">Idées</h1>
 
                     <ul class="w-full mb-5">
                         <%- ideas.map((idea)=> ( include('../partials/componentIdeaList', {idea: idea}) )) %>
@@ -27,5 +27,7 @@
         </main>
 
 </body>
+
+<script src="/ideaList.js"></script>
 
 </html>

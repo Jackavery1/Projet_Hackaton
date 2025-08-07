@@ -32,7 +32,7 @@ router.delete(
 
 // Routes Likes
 router.post("/api/idees/:id/like", isAuth, controleurs.likerIdee);
-router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLike);
+router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLikeIdee);
 router.post(
   "/api/idees/:ideeId/commentaires/:commentaireId/like",
   isAuth,

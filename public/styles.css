@@ -17,7 +17,6 @@
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-xl: 36rem;
-    --container-4xl: 56rem;
     --container-5xl: 64rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
@@ -186,6 +185,12 @@
   }
 }
 @layer utilities {
+  .invisible {
+    visibility: hidden;
+  }
+  .visible {
+    visibility: visible;
+  }
   .relative {
     position: relative;
   }
@@ -255,9 +260,6 @@
   }
   .w-5xl {
     width: var(--container-5xl);
-  }
-  .w-90\/100 {
-    width: calc(90/100 * 100%);
   }
   .w-\[10vw\] {
     width: 10vw;

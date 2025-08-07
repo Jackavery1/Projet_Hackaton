@@ -1,4 +1,4 @@
-<!-- <li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3">
+<li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3">
     <a href=<%="/idee/" + idea.name %> class="text-decoration-none flex justify-between items-center">
 
         <div class="flex flex-col">
@@ -10,38 +10,13 @@
             </p>
         </div>
 
-        <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
-            <button type="submit"
-                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
-                <%= idea.like ? "♥" : "♡" %>
-            </button>
-        </form>
-
-    </a>
-</li> -->
-
-<li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3">
-    
-    <a href=<%="/idee/" + idea.name %> class="text-decoration-none flex justify-between items-center">
-
-        <div class="flex flex-col">
-            <h5 class="text-black text-lg font-bold">
-                <%= idea.name %>
-            </h5>
-            <p class="text-black text-sm font-medium">
-                <%= idea.content %>
-            </p>
-        </div>
-
         <!-- 
-           
             L'attribut aria-label est ici pour ne pas lire simplement "♥" ou "♡", le lecteur d'écran lira
             une description claire de l'action, ce qui est essentiel
             pour la compréhension de l'utilisateur.
         -->
         <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
             <button type="submit"
-                aria-label="<%= idea.like ? "Retirer votre j'aime pour cette idée" : "Aimer cette idée" %>"
                 class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
                 <%= idea.like ? "♥" : "♡" %>
             </button>

@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -19,7 +19,11 @@
             <div class="flex justify-center items-center mb-5">
 
                 <form action=<%="/api/idees/" + idea.id %> method="delete">
-                    <button type="submit"
+                    <!-- 
+                        L'aria-label fournit une description pour les lecteurs d'écran. Au lieu de lire
+                        seulement "X", il annoncera "Supprimer l'idée : [nom de l'idée]". 
+                    -->
+                    <button type="submit" aria-label="Supprimer l'idée : <%= idea.name %>"
                         class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.8rem] text-xl mr-8">
                         X - Delete
                     </button>
@@ -29,9 +33,17 @@
                     <%= idea.name %>
                 </h1>
 
-                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
-                    <button type="submit"
-                        class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl ml-8">
+                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like" ) %> method="post">
+                    <!-- 
+                        Cet aria-label est dynamique et change en fonction de l'état du bouton.
+                        Un lecteur d'écran lira soit "J'aime cette idée", soit "Retirer votre j'aime pour l'idée",
+                        ce qui permet à l'utilisateur de comprendre l'action disponible
+                        sans avoir à se fier uniquement au symbole "♡" ou "♥".
+                    -->
+                    <button type="submit" aria-label="<%= idea.like ? " Retirer votre j'aime pour l'idée"
+                        : "J'aime cette idée" %>"
+                        class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem]
+                        px-[0.6rem] text-3xl ml-8">
                         <%= idea.like ? "♥" : "♡" %>
                     </button>
                 </form>
@@ -51,103 +63,23 @@
 
             </div>
 
-            <%- include('../partials/formBox', {form_type: "comment", idea: idea }); %>
+            <%- include('../partials/formBox', {form_type: "comment" , idea: idea }); %>
 
-                <ul class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 items-center">
-                    <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea: idea}) ))
-                        %>
-                </ul>
+            <!-- 
+                L'aria-label sur la balise <ul> donne un titre descriptif à la liste.
+                Cela aide les utilisateurs de lecteurs d'écran à savoir qu'ils parcourent
+                une "Liste des commentaires" plutôt que de simplement entendre
+                "liste de X éléments".
+            -->
+            <ul aria-label="Liste des commentaires pour l'idée : <%= idea.name %>"
+                class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
+                <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea:
+                    idea}) ))
+                    %>
+            </ul>
 
         </main>
 
 </body>
 
-</html> -->
-
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        <%= idea.name %>
-    </title>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
-</head>
-
-<body class="size-full">
-
-    <%- include('../partials/header'); %>
-
-    <main class="relative ml-[11vw] w-[89vw] flex flex-col justify-start">
-
-        <div class="flex justify-center items-center mb-5">
-
-            <form action=<%="/api/idees/" + idea.id %> method="delete">
-                <!-- 
-                    L'aria-label fournit une description pour les lecteurs d'écran. Au lieu de lire
-                    seulement "X", il annoncera "Supprimer l'idée : [nom de l'idée]".
-                    
-                -->
-                <button type="submit"
-                    aria-label="Supprimer l'idée : <%= idea.name %>"
-                    class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.8rem] text-xl mr-8">
-                    X - Delete
-                </button>
-            </form>
-
-            <h2 class="text-center text-4xl font-black">
-                <%= idea.name %>
-            </h2>
-
-            <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like") %> method="post">
-                <!-- 
-                    Cet aria-label est dynamique et change en fonction de l'état du bouton.
-                    Un lecteur d'écran lira soit "J'aime cette idée", soit "Retirer votre j'aime pour l'idée",
-                    ce qui permet à l'utilisateur de comprendre l'action disponible
-                    sans avoir à se fier uniquement au symbole "♡" ou "♥".
-                -->
-                <button type="submit"
-                    aria-label="<%= idea.like ? "Retirer votre j'aime pour l'idée" : "J'aime cette idée" %>"
-                    class="bg-transparent hover:bg-amber-500 rounded-full text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl ml-8">
-                    <%= idea.like ? "♥" : "♡" %>
-                </button>
-            </form>
-
-        </div>
-
-        <div class="w-5xl mx-auto flex flex-col mt-5 mb-12 p-4 rounded-xl bg-orange-500">
-
-            <p class="text-lg text-black font-bold">
-                <%= idea.content %>
-            </p>
-
-            <hr class="mt-3">
-            <p class="text-sm text-slate-900 font-medium mt-2">Likes : <%= idea.likes %> - Commentaires : <%=
-                    idea.comments.length %>
-            </p>
-
-        </div>
-
-        <%- include('../partials/formBox', {form_type: "comment", idea: idea }); %>
-
-        <!-- 
-            L'aria-label sur la balise <ul> donne un titre descriptif à la liste.
-            Cela aide les utilisateurs de lecteurs d'écran à savoir qu'ils parcourent
-            une "Liste des commentaires" plutôt que de simplement entendre
-            "liste de X éléments".
-        -->
-        <ul aria-label="Liste des commentaires pour l'idée : <%= idea.name %>" class="w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
-            <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea: idea}) ))
-                %>
-        </ul>
-
-    </main>
-
-</body>
-
 </html>
-
-
-

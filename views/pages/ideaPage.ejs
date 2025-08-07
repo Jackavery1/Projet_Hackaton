@@ -18,7 +18,7 @@
 
             <div class="flex justify-center items-center mb-5">
 
-                <form action=<%="/api/idees/" + idea.id %> method="delete">
+                <form action=<%="/api/idees/" + idea.id %> method="delete" id="idea_delete">
                     <!-- 
                         L'aria-label fournit une description pour les lecteurs d'écran. Au lieu de lire
                         seulement "X", il annoncera "Supprimer l'idée : [nom de l'idée]". 
@@ -33,7 +33,7 @@
                     <%= idea.name %>
                 </h1>
 
-                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like" ) %> method="post">
+                <form action=<%="/api/idees/" + idea.id + "/" + (idea.like ? "deletelike" : "like" ) %> method="post" id="idea_like">
                     <!-- 
                         Cet aria-label est dynamique et change en fonction de l'état du bouton.
                         Un lecteur d'écran lira soit "J'aime cette idée", soit "Retirer votre j'aime pour l'idée",
@@ -72,11 +72,11 @@
             <%- include('../partials/formBox', {form_type: "comment" , idea: idea }); %>
 
                 <!-- 
-                L'aria-label sur la balise <ul> donne un titre descriptif à la liste.
-                Cela aide les utilisateurs de lecteurs d'écran à savoir qu'ils parcourent
-                une "Liste des commentaires" plutôt que de simplement entendre
-                "liste de X éléments".
-            -->
+                    L'aria-label sur la balise <ul> donne un titre descriptif à la liste.
+                    Cela aide les utilisateurs de lecteurs d'écran à savoir qu'ils parcourent
+                    une "Liste des commentaires" plutôt que de simplement entendre
+                    "liste de X éléments".
+                -->
                 <ul aria-label="Liste des commentaires pour l'idée : <%= idea.name %>"
                     class="w-full max-w-5xl mx-auto flex flex-col mt-5 mb-12 p-4">
                     <%- idea.comments.map((comment)=> ( include('../partials/componentComment', {comment: comment, idea:
@@ -87,5 +87,8 @@
         </main>
 
 </body>
+
+<script src="/js/app.js"></script>
+<script src="/js/ideaPage.js"></script>
 
 </html>

@@ -14,9 +14,9 @@
 
         <h1 class="text-center font-black mb-8">Boîte à idées inclusives</h1>
 
-        <div class="w-full max-w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center">
+        <section class="w-full max-w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto flex flex-col justify-center" aria-labelledby="form-title">
 
-            <h2 class="text-center text-black text-3xl font-bold mb-4">
+            <h2 id="form-title" class="text-center text-black text-3xl font-bold mb-4">
                 Créer un compte
             </h2>
 
@@ -31,7 +31,7 @@
                     Nom
                 </label>
                 <input type="text" name="nomUtilisateur" id="nomUtilisateur" class="bg-slate-300 rounded-2xl p-3 text-lg"
-                    placeholder="Votre nom" required>
+                    placeholder="Votre nom" required autocomplete="username">
 
                 <!-- 
                     L'attribut autocomplete="current-password" est utilisé pour
@@ -42,7 +42,7 @@
                     Mot de passe
                 </label>
                 <input type="password" name="motDePasse" id="motDePasse" class="bg-slate-300 rounded-2xl p-3 text-lg"
-                    placeholder="******" required>
+                    placeholder="******" required autocomplete="current-password">
 
                 <!-- 
                     L'attribut autocomplete="new-password" est utilisé ici pour
@@ -52,7 +52,7 @@
                     Confirmer Mot de passe
                 </label>
                 <input type="password" name="confirmerMotDePasse" id="confirmerMotDePasse"
-                    class="bg-slate-300 rounded-2xl p-3 text-lg" placeholder="******" required>
+                    class="bg-slate-300 rounded-2xl p-3 text-lg" placeholder="******" required autocomplete="new-password">
 
                 <button type="submit"
                     class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-8 p-3 text-lg font-black w-fit self-center">

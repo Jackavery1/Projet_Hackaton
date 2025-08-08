@@ -6,7 +6,7 @@ Cette application permet à tout le monde de déposer, consulter et voter pour d
 
 L’objectif est de recueillir des suggestions diverses dans un environnement accessible, simple d'utilisation et convivial.
 
-### 🎯 Accessibilité
+### Accessibilité
 
 L’accessibilité est au cœur du projet. L’application a été conçue pour être utilisable par toutes et tous, y compris les personnes en situation de handicap.  
 Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) (niveau AA), notamment :
@@ -35,6 +35,8 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 
 - **Authentification :**
 
+  Hash du mot de passe via bcrypt et sécurisation des routes.
+
 - **Déploiement :**
 
   L’application est exécutée **en local** pour le moment. Le code source est disponible sur [GitHub](https://github.com/ton-utilisateur/ton-projet).
@@ -43,10 +45,10 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 
 ## Fonctionnalités principales
 
-- 💡 Soumission d’idées via un formulaire simple et intuitif
-- 📋 Consultation de la liste des idées soumises
-- ❤️ Vote (like) sur les idées préférées
-- ♿ Interface accessible pour tous les profils d’utilisateurs
+- Soumission d’idées via un formulaire simple et intuitif
+- Consultation de la liste des idées soumises
+- Vote (like) sur les idées préférées
+- Interface accessible pour tous les profils d’utilisateurs
 
 ---
 
@@ -88,7 +90,7 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 5. **Lancer l’application en local :**
 
 ```bash
-    npm start
+    npm run dev
 ```
 
 6. **Ouvrir votre navigateur à l’adresse :**
@@ -106,7 +108,7 @@ Si vous souhaitez participer :
 
 2. Créez une branche dédiée (git checkout -b feature-nouvelle-fonctionnalité)
 
-3. Commitez vos modifications (git commit -m 'Ajout d'une nouvelle fonctionnalité')
+3. Commitez vos modifications (git commit -m "Ajout d'une nouvelle fonctionnalité")
 
 4. Poussez votre branche (git push origin feature-nouvelle-fonctionnalité)
 

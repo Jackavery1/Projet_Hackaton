@@ -104,7 +104,7 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 
 ## Routes de l'API
 
-- **Routes login/inscription**
+- **Routes Login / Inscription**
 
       router.get("/", controleurs.afficherLogin);
       router.post("/api/login", controleurs.login);

@@ -8,7 +8,8 @@ L’objectif est de recueillir des suggestions diverses dans un environnement ac
 
 ### Accessibilité
 
-L’accessibilité est au cœur du projet. L’application a été conçue pour être utilisable par toutes et tous, y compris les personnes en situation de handicap.  
+L’accessibilité est au cœur du projet. L’application a été conçue pour être utilisable par toutes et tous, y compris les personnes en situation de handicap. 
+
 Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) (niveau AA), notamment :
 
 - Navigation au clavier

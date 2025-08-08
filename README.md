@@ -40,7 +40,7 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 
 - **Déploiement :**
 
-  L’application est exécutée **en local** pour le moment. Le code source est disponible sur [GitHub](https://github.com/ton-utilisateur/ton-projet).
+  L’application est exécutée **en local** pour le moment. Le code source est disponible sur [GitHub](https://github.com/Jackavery1/Projet_Hackaton).
 
 ---
 

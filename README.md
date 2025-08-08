@@ -99,6 +99,59 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 ```bash
     http://localhost:3000
 ```
+## Routes de l'API
+
+### 1. **GET** `/api/accueil`
+- **Description**: Renvoie un message de bienvenue.
+
+### 2. **POST** `/api/utilisateur`
+- **Description**: Crée un nouvel utilisateur en envoyant des données dans le corps de la requête.
+
+    **Exemple de corps de la requête**:
+    ```json
+    {
+      "nom": "Alice",
+      "email": "alice@example.com",
+      "motDePasse": "password123"
+    }
+    ```
+
+    **Réponse**:
+    - `201 Created`: Si l'utilisateur est créé avec succès.
+    - `400 Bad Request`: Si les données envoyées sont invalides.
+
+### 3. **GET** `/api/utilisateur/:id`
+- **Description**: Récupère les informations d'un utilisateur en utilisant son `id`.
+
+    **Exemple de requête**: `GET /api/utilisateur/1`
+
+    **Réponse**:
+    - `200 OK`: Renvoie les données de l'utilisateur.
+    - `404 Not Found`: Si l'utilisateur n'existe pas.
+
+### 4. **PUT** `/api/utilisateur/:id`
+- **Description**: Met à jour les informations d'un utilisateur existant.
+
+    **Exemple de corps de la requête**:
+    ```json
+    {
+      "email": "alice.updated@example.com"
+    }
+    ```
+
+    **Réponse**:
+    - `200 OK`: Si les informations ont été mises à jour.
+    - `404 Not Found`: Si l'utilisateur n'existe pas.
+
+### 5. **DELETE** `/api/utilisateur/:id`
+- **Description**: Supprime un utilisateur avec l'`id` spécifié.
+
+    **Exemple de requête**: `DELETE /api/utilisateur/1`
+
+    **Réponse**:
+    - `200 OK`: Si l'utilisateur est supprimé.
+    - `404 Not Found`: Si l'utilisateur n'existe pas.
+
 
 ## Contribution
 

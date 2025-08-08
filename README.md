@@ -66,7 +66,7 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 1. **Cloner le dépôt depuis GitHub**
 
 ```bash
-    git clone https://github.com/ton-utilisateur/ton-projet.git
+    git clone https://github.com/Jackavery1/Projet_Hackaton.git
 ```
 
 2. **Aller dans le dossier du projet**

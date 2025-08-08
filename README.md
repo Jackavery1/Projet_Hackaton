@@ -99,34 +99,42 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 ```bash
     http://localhost:3000
 ```
+
+---
+
 ## Routes de l'API
 
-// Routes login/inscription
-router.get("/", controleurs.afficherLogin);
-router.post("/api/login", controleurs.login);
+- **Routes login/inscription**
 
-router.get("/signin", controleurs.afficherSignin);
-router.post("/api/register", controleurs.register);
+      router.get("/", controleurs.afficherLogin);
+      router.post("/api/login", controleurs.login);
 
-// Routes  Idées
-router.get("/listeidee", isAuth, controleurs.afficherIdeaList);
-router.get("/idee/:id", isAuth, controleurs.afficherIdeaPage);
+      router.get("/signin", controleurs.afficherSignin);
+      router.post("/api/register", controleurs.register);
 
-router.post("/api/idees", isAuth, controleurs.creerIdee);
-router.get("/api/idees", isAuth, controleurs.listerIdees);
-router.post("/api/idees/:id", isAuth, controleurs.supprimerIdee);
+- **Routes  Idées**
 
-// Routes Commentaires
-router.post("/api/idees/:id/commentaire",isAuth,controleurs.ajouterCommentaire);
-router.post("/api/idees/:id/commentaires/:commentaireId",isAuth,controleurs.supprimerCommentaire);
+      router.get("/listeidee", isAuth, controleurs.afficherIdeaList);
+      router.get("/idee/:id", isAuth, controleurs.afficherIdeaPage);
 
-// Routes Likes
-router.post("/api/idees/:id/like", isAuth, controleurs.likerIdee);
-router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLike);
-router.post("/api/idees/:ideeId/commentaires/:commentaireId/like",isAuth,controleurs.likerCommentaire);
+      router.post("/api/idees", isAuth, controleurs.creerIdee);
+      router.get("/api/idees", isAuth, controleurs.listerIdees);
+      router.post("/api/idees/:id", isAuth, controleurs.supprimerIdee);
 
-//Déco
-router.post("/logout", (req, res) => {req.session.destroy(() => {res.redirect("/"););
+- **Routes Commentaires**
+
+      router.post("/api/idees/:id/commentaire",isAuth,controleurs.ajouterCommentaire);
+      router.post("/api/idees/:id/commentaires/:commentaireId",isAuth,controleurs.supprimerCommentaire);
+
+- **Routes Likes**
+
+      router.post("/api/idees/:id/like", isAuth, controleurs.likerIdee);
+      router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLike);
+      router.post("/api/idees/:ideeId/commentaires/:commentaireId/like",isAuth,controleurs.likerCommentaire);
+
+- **Déco**
+
+      router.post("/logout", (req, res) => {req.session.destroy(() => {res.redirect("/"););
 
 ## Contribution
 

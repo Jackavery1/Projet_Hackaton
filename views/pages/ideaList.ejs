@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,39 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Liste d'idées</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
+    <!-- Ajoutez ici un lien vers votre fichier CSS personnalisé si nécessaire -->
 </head>
 
-<body class="size-full">
-
-
+<body class="bg-gray-100 min-h-screen">
     <%- include('../partials/header'); %>
 
-        <!-- 
-            J'ai ajouté l'attribut `aria-labelledby` pour lier le contenu
-            principal au titre de la section, ce qui permet aux technologies
-            d'assistance de donner plus de contexte.
-        -->
-        <main class="relative w-full flex flex-col justify-start" aria-labelledby="main-heading">
-            <div class="w-full max-w-5xl mx-auto flex flex-col justify-start items-center">
+    <main class="relative w-full flex flex-col justify-start" aria-labelledby="main-heading">
+        <div class="w-full max-w-5xl mx-auto flex flex-col justify-start items-center p-4 md:p-8">
 
-                <%- include('../partials/formBox', { form_type: "idea" }); %>
-
-                    <!-- 
-                        J'ai ajouté un `id="main-heading"` pour qu'il puisse
-                        être référencé par le `aria-labelledby` de la balise <main>.
-                    -->
-                    <h1 id="main-heading" class="text-center text-4xl font-black mt-8 mb-5">Idées</h1>
-
-                    <ul class="w-full mb-5">
-                        <%- ideas.map((idea)=> ( include('../partials/componentIdeaList', { idea: idea }) )) %>
-                    </ul>
-
+            <!-- Formulaire de création d'idée -->
+            <div class="w-full max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 my-8">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Créer une nouvelle idée</h2>
+                <form action="/api/idees" method="POST" class="space-y-4">
+                    <div>
+                        <label for="titre" class="block text-gray-700">Titre de l'idée</label>
+                        <input type="text" id="titre" name="titre"
+                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            required>
+                    </div>
+                    <div>
+                        <label for="description" class="block text-gray-700">Description</label>
+                        <textarea id="description" name="description" rows="4"
+                            class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            required></textarea>
+                    </div>
+                    <div>
+                        <label for="category" class="block text-gray-700">Catégorie</label>
+                        <!-- Mise à jour ici : ajout de la classe `form-select` -->
+                        <select id="category" name="category"
+                            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 form-select">
+                            <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                                <% categories.forEach(categorie => { %>
+                                    <option value="<%= categorie._id %>"><%= categorie.nom %></option>
+                                <% }); %>
+                            <% } else { %>
+                                <option disabled>Aucune catégorie disponible</option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Ajouter l'idée
+                    </button>
+                </form>
             </div>
-        </main>
+
+            <h1 id="main-heading" class="text-center text-4xl font-black mt-8 mb-5">Idées</h1>
+
+            <ul class="w-full mb-5">
+                <% if (typeof ideas !== 'undefined' && ideas.length > 0) { %>
+                    <% ideas.forEach(idea => { %>
+                        <%- include('../partials/componentIdeaList', { idea: idea }) %>
+                    <% }); %>
+                <% } else { %>
+                    <!-- Message pour indiquer qu'il n'y a pas d'idées -->
+                    <li class="text-center text-gray-500">Aucune idée à afficher pour le moment.</li>
+                <% } %>
+            </ul>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/ideaList.js"></script>
 
 </body>
-
-<script src="/js/app.js"></script>
-<script src="/js/ideaList.js"></script>
-
-</html>

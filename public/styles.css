@@ -538,6 +538,11 @@ button:focus, button:focus-visible {
   transition: var(--transition-Global);
   transform: scale(1.01) translateX(1rem);
 }
+.form-select {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+    border-color: #d1d5db !important;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;

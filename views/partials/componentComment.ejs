@@ -1,20 +1,13 @@
-<li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 flex justify-between items-center">
-
+<li class="w-full rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 flex justify-between items-center" data-comment-id="<%= comment.id %>" data-idea-id="<%= idea.id %>">
+    
     <div class="flex gap-3">
-
-        <!-- 
-            L'attribut aria-label sur le bouton "X" fournit une description claire
-            pour les lecteurs d'écran. Au lieu de lire seulement "X", il annoncera
-            "Supprimer le commentaire de [nom de l'utilisateur]", ce qui
-            rend l'action beaucoup plus compréhensible pour les utilisateurs.
-        -->
-        <form action=<%="/api/idees/" + idea.id + "/commentaires/" + comment.id %> method="delete" class=" pb-[0.4rem]
-            pr-[1.2rem]">
-            <button type="submit" aria-label="Supprimer le commentaire de <%= comment.name %>"
-                class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-xl">
-                X
-            </button>
-        </form>
+        <!-- Bouton de suppression géré par JavaScript -->
+        <button 
+            type="button" 
+            aria-label="Supprimer le commentaire de <%= comment.name %>"
+            class="delete-comment-btn bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-xl pb-[0.4rem] pr-[1.2rem]">
+            X
+        </button>
 
         <div class="flex flex-col self-center">
             <h3 class="text-black text-lg font-bold">
@@ -24,23 +17,14 @@
                 <%= comment.texte %>
             </p>
         </div>
-
     </div>
 
-    <form action=<%="/api/idees/" + idea.id + "/commentaires/" + comment.id + "/" + (idea.like ? "deletelike" : "like" )
-        %> method="post">
-        <!-- 
-            Comme le bouton de suppression, cet aria-label est dynamique.
-            Il s'adapte pour indiquer clairement l'action : aimer le commentaire
-            ou retirer son "j'aime", ce qui est essentiel car l'icône seule
-            (♥ ou ♡) peut ne pas être suffisamment explicite pour tous.
-        -->
-        <button type="submit" aria-label="<%= comment.like ? " Retirer votre j'aime pour ce commentaire"
-            : "Aimer ce commentaire" %>"
-            class="bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem]
-            px-[0.6rem] text-3xl">
-            <%= comment.like ? "♥" : "♡" %>
-        </button>
-    </form>
-
+    <!-- Bouton de like/unlike géré par JavaScript -->
+    <button 
+        type="button" 
+        data-comment-like="<%= comment.like ? 'true' : 'false' %>"
+        aria-label="<%= comment.like ? 'Retirer votre j\'aime pour ce commentaire' : 'Aimer ce commentaire' %>"
+        class="like-comment-btn bg-transparent hover:bg-amber-500 rounded-full text-black hover:text-white font-bold py-[0.2rem] px-[0.6rem] text-3xl">
+        <%= comment.like ? "♥" : "♡" %>
+    </button>
 </li>

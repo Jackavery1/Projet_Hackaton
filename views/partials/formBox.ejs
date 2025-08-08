@@ -1,39 +1,24 @@
-<div class="w-xl rounded-xl bg-orange-500 px-5 pt-2 pb-4 mb-3 mx-auto">
-
-    <!-- 
-        L'ajout d'un ID unique à l'en-tête (h4) est crucial pour
-        l'accessibilité. Cet ID, "form-title", sera référencé par
-        l'attribut aria-labelledby du formulaire.
-    -->
-    <h2 id="form-title" class="text-center text-black text-3xl font-bold mb-4">
-        <%= form_type=="idea" ? "Proposer une nouvelle idée" : "Écrire un commentaire" %>
-    </h2>
-
-    <!-- 
-        L'attribut aria-labelledby sur la balise <form> lie le formulaire
-        à son titre. Cela permet aux lecteurs d'écran d'annoncer le but du
-        formulaire (par ex., "Proposer une nouvelle idée") dès que
-        l'utilisateur se concentre dessus, améliorant la navigation.
-    -->
-    <form action=<%=form_type=="idea" ? "/api/idees" : "/api/idees/" + idea.id + "/commentaire" %> method="post"
-        class="flex flex-col text-black" aria-labelledby="form-title">
-
-        <div class="flex flex-col <%= form_type==" idea" ? "visible" : "hidden" %>">
-            <label for="category" class="text-xl font-medium mb-2">
-                Categorie
-            </label>
-            <input type="text" name="category" id="category" class="bg-slate-300 rounded-2xl p-3 text-lg">
-        </div>
-
-        <label for=<%=form_type %> class="text-xl font-medium mt-3 mb-2">
-            <%= form_type=="idea" ? "Idée" : "Commentaire" %>
-        </label>
-        <textarea name=<%=form_type %> id=<%=form_type %> class="bg-slate-300 rounded-2xl p-3 text-lg"></textarea>
-
-        <button type="submit"
-            class="bg-slate-500 hover:bg-slate-200 text-white hover:text-black rounded-2xl mt-3 p-3 text-lg font-black w-fit self-center">
-            <%= form_type=="idea" ? "Proposer une idée" : "Poster un commentaire" %>
-        </button>
-    </form>
-
+<!-- partials/formBox.ejs -->
+<div class="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div class="w-full max-w-lg bg-orange-500 rounded-lg shadow-lg p-8">
+        <h2 class="text-3xl font-bold text-black text-center mb-6">Créer une nouvelle idée</h2>
+        <form id="ideaForm" action="/ideas" method="POST" class="space-y-6">
+            <div>
+                <label for="title" class="block text-black text-lg font-medium mb-2">Titre de l'idée</label>
+                <input type="text" id="title" name="title" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-700 text-black">
+            </div>
+            <div>
+                <label for="description" class="block text-black text-lg font-medium mb-2">Description</label>
+                <textarea id="description" name="description" rows="4" required
+                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-700 text-black"></textarea>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit"
+                        class="px-6 py-3 bg-white text-orange-500 font-bold text-lg rounded-lg shadow-md hover:bg-gray-100 transition duration-300 ease-in-out">
+                    Ajouter l'idée
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

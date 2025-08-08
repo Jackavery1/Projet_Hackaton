@@ -10,8 +10,11 @@ exports.afficherSignin = (req, res) => res.render("pages/signin");
 exports.afficherIdeaList = async (req, res) => {
   try {
     const ideas = await Idee.find();
+    // Ajout de la récupération des catégories
+    const categories = await Categorie.find();
     res.render("pages/ideaList", {
       ideas,
+      categories, // Passez les catégories à la vue
       utilisateurConnecte: req.session.utilisateur,
     });
   } catch (err) {
@@ -23,15 +26,17 @@ exports.afficherIdeaPage = async (req, res) => {
   try {
     const idea = await Idee.findById(req.params.id);
     if (!idea) return res.status(404).send("Idée non trouvée");
+    // Ajout de la récupération des catégories
+    const categories = await Categorie.find();
     res.render("pages/ideePage", {
       idea,
+      categories, // Passez les catégories à la vue
       utilisateurConnecte: req.session.utilisateur,
     });
   } catch (err) {
     res.status(500).send("Erreur serveur");
   }
 };
-
 // #endregion
 
 // Authentification
@@ -246,7 +251,7 @@ exports.supprimerLikeCommentaire = async (req, res) => {
     }
 };
 
-// #endregion
+
 
 // #endregion
 

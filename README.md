@@ -136,6 +136,8 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 
       router.post("/logout", (req, res) => {req.session.destroy(() => {res.redirect("/"););
 
+---
+
 ## Contribution
 
 Les contributions sont les bienvenues !
@@ -151,9 +153,13 @@ Si vous souhaitez participer :
 
 5. Ouvrez une Pull Request
 
+---
+
 ## Contact
 
 Pour toute question, suggestion ou retour d’expérience, vous pouvez me contacter à : [jorisdavid.martinez@gmail.com](mailto:jorisdavid.martinez@gmail.com)
+
+---
 
 ## Licence
 

@@ -101,57 +101,32 @@ Elle respecte plusieurs bonnes pratiques des [normes WCAG](https://www.w3.org/WA
 ```
 ## Routes de l'API
 
-### 1. **GET** `/api/accueil`
-- **Description**: Renvoie un message de bienvenue.
+// Routes login/inscription
+router.get("/", controleurs.afficherLogin);
+router.post("/api/login", controleurs.login);
 
-### 2. **POST** `/api/utilisateur`
-- **Description**: Crée un nouvel utilisateur en envoyant des données dans le corps de la requête.
+router.get("/signin", controleurs.afficherSignin);
+router.post("/api/register", controleurs.register);
 
-    **Exemple de corps de la requête**:
-    ```json
-    {
-      "nom": "Alice",
-      "email": "alice@example.com",
-      "motDePasse": "password123"
-    }
-    ```
+// Routes  Idées
+router.get("/listeidee", isAuth, controleurs.afficherIdeaList);
+router.get("/idee/:id", isAuth, controleurs.afficherIdeaPage);
 
-    **Réponse**:
-    - `201 Created`: Si l'utilisateur est créé avec succès.
-    - `400 Bad Request`: Si les données envoyées sont invalides.
+router.post("/api/idees", isAuth, controleurs.creerIdee);
+router.get("/api/idees", isAuth, controleurs.listerIdees);
+router.post("/api/idees/:id", isAuth, controleurs.supprimerIdee);
 
-### 3. **GET** `/api/utilisateur/:id`
-- **Description**: Récupère les informations d'un utilisateur en utilisant son `id`.
+// Routes Commentaires
+router.post("/api/idees/:id/commentaire",isAuth,controleurs.ajouterCommentaire);
+router.post("/api/idees/:id/commentaires/:commentaireId",isAuth,controleurs.supprimerCommentaire);
 
-    **Exemple de requête**: `GET /api/utilisateur/1`
+// Routes Likes
+router.post("/api/idees/:id/like", isAuth, controleurs.likerIdee);
+router.post("/api/idees/:id/deletelike", isAuth, controleurs.supprimerLike);
+router.post("/api/idees/:ideeId/commentaires/:commentaireId/like",isAuth,controleurs.likerCommentaire);
 
-    **Réponse**:
-    - `200 OK`: Renvoie les données de l'utilisateur.
-    - `404 Not Found`: Si l'utilisateur n'existe pas.
-
-### 4. **PUT** `/api/utilisateur/:id`
-- **Description**: Met à jour les informations d'un utilisateur existant.
-
-    **Exemple de corps de la requête**:
-    ```json
-    {
-      "email": "alice.updated@example.com"
-    }
-    ```
-
-    **Réponse**:
-    - `200 OK`: Si les informations ont été mises à jour.
-    - `404 Not Found`: Si l'utilisateur n'existe pas.
-
-### 5. **DELETE** `/api/utilisateur/:id`
-- **Description**: Supprime un utilisateur avec l'`id` spécifié.
-
-    **Exemple de requête**: `DELETE /api/utilisateur/1`
-
-    **Réponse**:
-    - `200 OK`: Si l'utilisateur est supprimé.
-    - `404 Not Found`: Si l'utilisateur n'existe pas.
-
+//Déco
+router.post("/logout", (req, res) => {req.session.destroy(() => {res.redirect("/"););
 
 ## Contribution
 
